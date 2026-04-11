@@ -26,6 +26,8 @@ dependencies = [
   "Sphinx>=9.1",
   "numpydoc>=1.10",
   "pydata-sphinx-theme>=0.17",
+  "hatch>=1.16.5",
+  "build>=1.4.3",
 ]
 
 [project.urls]
