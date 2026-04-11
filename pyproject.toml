@@ -7,7 +7,7 @@ name = "appliedchemlabwork-tayra"
 dynamic = ["version"]
 description = 'Python package for experiment analysis for Applied Chemistry Labolatory Work subject in Kyoto Institute of Technology.'
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 license = "AGPL-3.0-or-later"
 keywords = []
 authors = [
@@ -21,7 +21,12 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
   "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
 ]
-dependencies = []
+dependencies = [
+  "numpy>=2.4.4",
+  "Sphinx>=9.1",
+  "numpydoc>=1.10",
+  "pydata-sphinx-theme>=0.17",
+]
 
 [project.urls]
 Documentation = "https://github.com/Tayra-Sakurai/appliedchemlabwork-tayra#readme"
