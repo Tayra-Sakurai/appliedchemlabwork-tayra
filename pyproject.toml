@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "appliedchemlabwork-tayra"
+dynamic = ["version"]
+description = 'Python package for experiment analysis for Applied Chemistry Labolatory Work subject in Kyoto Institute of Technology.'
+readme = "README.md"
+requires-python = ">=3.13"
+license = "AGPL-3.0-or-later"
+keywords = []
+authors = [
+  { name = "Tayra Sakurai", email = "tayra_sakurai@icloud.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/Tayra-Sakurai/appliedchemlabwork-tayra#readme"
+Issues = "https://github.com/Tayra-Sakurai/appliedchemlabwork-tayra/issues"
+Source = "https://github.com/Tayra-Sakurai/appliedchemlabwork-tayra"
+
+[tool.hatch.version]
+path = "src/appliedchemlabwork_tayra/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/appliedchemlabwork_tayra tests}"
+
+[tool.coverage.run]
+source_pkgs = ["appliedchemlabwork_tayra", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/appliedchemlabwork_tayra/__about__.py",
+]
+
+[tool.coverage.paths]
+appliedchemlabwork_tayra = ["src/appliedchemlabwork_tayra", "*/appliedchemlabwork-tayra/src/appliedchemlabwork_tayra"]
+tests = ["tests", "*/appliedchemlabwork-tayra/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
