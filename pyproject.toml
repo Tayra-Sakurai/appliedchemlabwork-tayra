@@ -32,7 +32,7 @@ dependencies = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/Tayra-Sakurai/appliedchemlabwork-tayra#readme"
+Documentation = "https://tayra-sakurai.github.io/appliedchemlabwork-tayra"
 Issues = "https://github.com/Tayra-Sakurai/appliedchemlabwork-tayra/issues"
 Source = "https://github.com/Tayra-Sakurai/appliedchemlabwork-tayra"
 

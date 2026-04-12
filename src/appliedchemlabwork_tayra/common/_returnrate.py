@@ -25,7 +25,7 @@ def calc_return_rate(
     Raises
     ------
     RuntimeError
-        `result` is larger than `initialamount`.
+        ``result`` is larger than ``initialamount``.
     """
     if initialamount < result:
         raise RuntimeError(
