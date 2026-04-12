@@ -7,6 +7,7 @@ Submodules
 ----------
 
 .. autosummary::
+   :toctree: generated/
 
    calc_return_rate
 """
