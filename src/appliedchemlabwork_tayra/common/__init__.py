@@ -1,7 +1,13 @@
 # SPDX-FileCopyrightText: 2026-present Tayra Sakurai <tayra_sakurai@icloud.com>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
-"""This is a Python package for analysis of raw data.
+"""Common modules used in this package.
 
-This is for the class \"Laboratory Works on Applied Chemistry.\"
+Submodules
+----------
+
+.. autosummary::
+
+   .calc_return_rate
 """
+from ._returnrate import *

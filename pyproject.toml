@@ -9,6 +9,7 @@ description = 'Python package for experiment analysis for Applied Chemistry Labo
 readme = "README.md"
 requires-python = ">=3.14"
 license = "AGPL-3.0-or-later"
+license-files = ["LICENSE.txt"]
 keywords = []
 authors = [
   { name = "Tayra Sakurai", email = "tayra_sakurai@icloud.com" },
