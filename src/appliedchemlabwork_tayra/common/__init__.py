@@ -8,6 +8,6 @@ Submodules
 
 .. autosummary::
 
-   .calc_return_rate
+   calc_return_rate
 """
 from ._returnrate import *
