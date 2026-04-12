@@ -1,2 +1,4 @@
 *.bat text
 *.inv binary
+*.woff binary
+*.ttf binary
