@@ -29,6 +29,7 @@ dependencies = [
   "pydata-sphinx-theme>=0.17",
   "hatch>=1.16.5",
   "build>=1.4.3",
+  "pandas>=3.0.2",
 ]
 
 [project.urls]

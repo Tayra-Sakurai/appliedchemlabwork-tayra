@@ -5,3 +5,4 @@ Sphinx>=9.1
 pydata-sphinx-theme>=0.17
 build>=1.4.3
 hatch>=1.16.5
+pandas>=3.0.2
