@@ -1,7 +1,7 @@
 # AppliedChemLabWork-tayra
 
-[![PyPI - Version](https://img.shields.io/pypi/v/appliedchemlabwork-tayra.svg)](https://test.pypi.org/project/appliedchemlabwork-tayra)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/appliedchemlabwork-tayra.svg)](https://test.pypi.org/project/appliedchemlabwork-tayra)
+[![PyPI - Version](https://img.shields.io/pypi/v/appliedchemlabwork-tayra.svg)](https://pypi.org/project/appliedchemlabwork-tayra)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/appliedchemlabwork-tayra.svg)](https://pypi.org/project/appliedchemlabwork-tayra)
 
 -----
 
