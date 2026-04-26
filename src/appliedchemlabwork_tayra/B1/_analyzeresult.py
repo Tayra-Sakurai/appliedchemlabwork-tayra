@@ -1,5 +1,4 @@
 """Result analyzer."""
-from ..common import *
 import pandas
 import numpy as np
 
@@ -32,7 +31,7 @@ def analyze(
     +=============+==============================+==============+
     |    water    | 300.0                        | 274.2        |
     +-------------+------------------------------+--------------+
-    |    alum     | 32.432                       | 6.903        |
+    |    alum     | 32.432                       | 0.6903       |
     +-------------+------------------------------+--------------+
     | Solubility  | 11.4                         | 11.4         |
     +-------------+------------------------------+--------------+
@@ -45,10 +44,12 @@ def analyze(
         index_col=0
     )
     vals: np.ndarray[tuple[int, int], np.dtype[np.float64]] = df.to_numpy()
-    y: np.float64 = vals[1, 1] / ((vals[2, 2] / 100) * (vals[0,0] - vals[0,1]))
+    resulted_amount: np.float64 = vals[1,1]
+    expected_amount: np.float64 = vals[1,0] - vals[0,1] * (vals[2,1] / 100)
+    yrate: np.float64 = resulted_amount / expected_amount
     data: dict[str, np.float64] = {
         "Initial Amount or Solubility": np.float64(0),
-        "Final Amount": y,
+        "Final Amount": yrate,
     }
-    df["Yield"] = data
+    df.loc["Yield"] = data
     return df
