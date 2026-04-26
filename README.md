@@ -13,13 +13,23 @@
 
 ## Installation
 
-```console
+```powershell
 pip install appliedchemlabwork-tayra
 ```
 
 ## Description
 
 This is a specialized Python package for laboratory work of Kyoto Institute of Technology. Please note that this is unofficial.
+
+### GUI Tools
+
+The tools can be used with the following command.
+
+```powershell
+python3 -m appliedchemlabwork_tayra.B1
+```
+
+The term `B1` varies by the experiment number.
 
 ## License
 
