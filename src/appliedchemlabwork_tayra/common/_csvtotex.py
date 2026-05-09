@@ -33,12 +33,14 @@ def csv_to_latex(
     | Header  | Header 1  | Header 2  |
     +=========+===========+===========+
     | Content | Content 2 | Content 3 |
+    +---------+-----------+-----------+
     | Content | Content 4 | Content 5 |
     +---------+-----------+-----------+
 
     is equivalent to:
 
     .. code-block:: latex
+
        \\begin{tabular}[|c|c|c|]
            \\hline
            Header & Header 1 & Header 2\\\\

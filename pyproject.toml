@@ -26,9 +26,9 @@ dependencies = [
   "numpy>=2.4.4",
   "Sphinx>=9.1",
   "numpydoc>=1.10",
-  "pydata-sphinx-theme>=0.17",
+  "pydata-sphinx-theme>=0.17.1",
   "hatch>=1.16.5",
-  "build>=1.4.3",
+  "build>=1.5",
   "pandas>=3.0.2",
 ]
 

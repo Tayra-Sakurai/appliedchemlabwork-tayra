@@ -361,17 +361,28 @@ to the CSV file to be converted.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Content
-Content</p></td>
-<td><p>Content 2
-Content 4</p></td>
-<td><p>Content 3
-Content 5</p></td>
+<tr class="row-even"><td><p>Content</p></td>
+<td><p>Content 2</p></td>
+<td><p>Content 3</p></td>
+</tr>
+<tr class="row-odd"><td><p>Content</p></td>
+<td><p>Content 4</p></td>
+<td><p>Content 5</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <p>is equivalent to:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}</span>[|c|c|c|]
+    <span class="k">\hline</span>
+    Header <span class="nb">&amp;</span> Header 1 <span class="nb">&amp;</span> Header 2<span class="k">\\</span>
+    <span class="k">\hline</span>
+    Content <span class="nb">&amp;</span> Content 2 <span class="nb">&amp;</span> Content 3<span class="k">\\</span>
+    Content <span class="nb">&amp;</span> Content 4 <span class="nb">&amp;</span> Content 5<span class="k">\\</span>
+    <span class="k">\hline</span>
+<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+</pre></div>
+</div>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">appliedchemlabwork_tayra</span><span class="w"> </span><span class="kn">import</span> <span class="n">common</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">common</span><span class="o">.</span><span class="n">csv_to_latex</span><span class="p">(</span><span class="s1">&#39;data.csv&#39;</span><span class="p">)</span>
