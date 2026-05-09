@@ -10,5 +10,7 @@ Submodules
    :toctree: generated/
 
    calc_return_rate
+   csv_to_latex
 """
 from ._returnrate import *
+from ._csvtotex import *
