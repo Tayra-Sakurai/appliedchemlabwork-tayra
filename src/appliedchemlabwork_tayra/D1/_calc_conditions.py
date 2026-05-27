@@ -12,18 +12,18 @@ def calc_required_amount_hcl(
 
     Parameters
     ----------
-    concentration_hcl: float
+    concentration_hcl : float
         The concentration of HCl aq.
-    concentration_base: float
+    concentration_base : float
         The concentration of the base to be titrated.
-    volume_base: float, default 25.0
+    volume_base : float, default 25.0
         The base volume.
-    n_oh: int, default 1
+    n_oh : int, default 1
         The valence of the base.
 
     Returns
     -------
-    volume_hcl: float
+    volume_hcl : float
         The required volume of HCl.
     """
     return (concentration_base * volume_base * n_oh) / concentration_hcl
@@ -38,16 +38,16 @@ def calc_concentration(
 
     Parameters
     ----------
-    conc_orig: float
+    conc_orig : float
         The original concentration of the solution.
-    vol_sol: float
+    vol_sol : float
         The volume of the concentrated solution.
-    vol_water: float
+    vol_water : float
         The volume of pure water added to the solution.
 
     Returns
     -------
-    conc_diluted: float
+    conc_diluted : float
         The concentration of diluted solution.
     """
     return (conc_orig * vol_sol) / (vol_sol + vol_water)

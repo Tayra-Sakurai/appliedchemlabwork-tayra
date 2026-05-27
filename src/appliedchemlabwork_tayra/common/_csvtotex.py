@@ -16,13 +16,13 @@ def csv_to_latex(
 
     Parameters
     ----------
-    file: PathLike | str
+    file : PathLike | str
         The path-like object or the path string
         to the CSV file to be converted.
 
     Returns
     -------
-    tex_code: str
+    tex_code : str
         The LaTeX code of the table.
 
     Notes
