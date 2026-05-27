@@ -31,6 +31,7 @@ dependencies = [
   "build>=1.5",
   "pandas>=3.0.3",
   "scipy>=1.17.1",
+  "pyQt6>=6.11",
 ]
 
 [project.urls]
