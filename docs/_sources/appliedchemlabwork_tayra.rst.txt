@@ -9,6 +9,7 @@ Subpackages
 
    appliedchemlabwork_tayra.B1
    appliedchemlabwork_tayra.common
+   appliedchemlabwork_tayra.D1
 
 Module contents
 ---------------
