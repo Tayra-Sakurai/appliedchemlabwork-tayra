@@ -59,7 +59,7 @@ def check_match(
         return False
     if (25e-3 * d) < (6e-3 * 0.1):
         return False
-    if (v3 + v4 + ETHYL_ACETATE_REACT) > 280:
+    if (v3 + v4 + ETHYL_ACETATE_REACT) > 280e-3:
         return False
     if (v4 * c) <= (ETHYL_ACETATE_REACT * a):
         return False
