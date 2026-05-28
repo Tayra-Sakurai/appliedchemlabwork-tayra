@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026-present Tayra Sakurai <tayra_sakurai@icloud.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
 from typing import Any
 import numpy as np
 from ._pattern_match import check_match
