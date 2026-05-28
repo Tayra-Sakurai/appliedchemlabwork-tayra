@@ -63,4 +63,6 @@ def check_match(
         return False
     if (v4 * c) <= (ETHYL_ACETATE_REACT * a):
         return False
+    if (v3 + v4 + ETHYL_ACETATE_REACT) <= 250e-3:
+        return False
     return True
