@@ -22,7 +22,7 @@ K2S = 7.23e-2
 E_A = 4.6e4
 VR = 250e-3
 VMAX = 280e-3
-TCOLD = 277.15
+TCOLD = 274.15
 
 
 def check_match(
@@ -87,7 +87,7 @@ def check_match(
         return False
     if (VE2 * a1) >= (v2 * b1):
         return False
-    if (a2 / b1) <= 6e-3:
+    if ((VS * a2) / b1) <= 6e-3:
         return False
     if (v3 + v4 + VE2) <= VR:
         return False
