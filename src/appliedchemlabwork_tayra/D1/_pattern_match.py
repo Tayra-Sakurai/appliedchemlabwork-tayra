@@ -30,7 +30,7 @@ def check_match(
     v2: float | np.floating[Any],
     v3: float | np.floating[Any],
     v4: float | np.floating[Any]
-) -> bool:
+) -> tuple[bool, np.float64]:
     """Checks if the point is in the territory.
 
     Parameters
@@ -52,6 +52,8 @@ def check_match(
     match : bool
         ``True`` if the value fulfills the conditions;
         otherwise, ``False``.
+    th_cold : float64
+        The half life under the cold condition.
 
     Notes
     -----
@@ -76,26 +78,26 @@ def check_match(
     base_required3 = 12 * ((VHCL * CHCL - VS * bi) / b1)
     base_required = base_required1 + base_required2 + base_required3
     if (v2 + VB1) < (base_required * 1.1):
-        return False
+        return False, np.float64(0)
     if ((VE1 * 0.8 * 100) / v1) >= 7:
-        return False
+        return False, np.float64(0)
     if (th_warm / 60) <= 12:
-        return False
+        return False, np.float64(0)
     if (th_cold / 60) >= 60:
-        return False
+        return False, np.float64(0)
     if (VS * b2) >= (VHCL * CHCL):
-        return False
+        return False, np.float64(0)
     if (VE2 * a1) >= (v2 * b1):
-        return False
+        return False, np.float64(0)
     if ((VS * a2) / b1) <= 6e-3:
-        return False
+        return False, np.float64(0)
     if (v3 + v4 + VE2) <= VR:
-        return False
+        return False, np.float64(0)
     if (v3 + v4 + VE2) >= VMAX:
-        return False
+        return False, np.float64(0)
     if (v1 + VE1) <= (3 * VE2):
-        return False
-    return True
+        return False, np.float64(0)
+    return True, th_cold
 
 
 def _calc_k2(temp: float) -> np.float64:
