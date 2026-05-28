@@ -25,8 +25,9 @@ def main():
                         bksps = '\b' * len(message)
                         if check_match(v1, v2, v3, v4):
                             plist.append(np.array([v1, v2, v3, v4]))
+        print()
     except KeyboardInterrupt:
-        pass
+        print()
     except Exception as e:
         raise e
     finally:
