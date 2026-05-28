@@ -45,7 +45,7 @@ def main():
             th_array: np.ndarray[tuple[int], np.dtype[np.float64]] = np.array([
                 i[0] for i in plist
             ])
-            mindex: np.intp = np.argmax(th_array)
+            mindex: np.intp = np.argmin(th_array)
             print(plist[mindex][1])
 
 
