@@ -97,6 +97,8 @@ def check_match(
         return False, np.float64(0)
     if (v1 + VE1) <= (3 * VE2):
         return False, np.float64(0)
+    if (a2 * 1.15) >= b2:
+        return False, np.float64(0)
     return True, th_cold
 
 
