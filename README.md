@@ -14,7 +14,7 @@
 ## Installation
 
 ```powershell
-pip install appliedchemlabwork-tayra
+pip install appliedchemlabwork_tayra
 ```
 
 ## Description
