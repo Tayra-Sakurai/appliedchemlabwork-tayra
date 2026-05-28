@@ -6,10 +6,10 @@ import random
 
 def main():
     try:
-        v2s = np.arange(700e-3, 1., 1e-2)
-        v1s = np.arange(10e-3, 2., 1e-2)
-        v3s = np.arange(0, 2.5e-1, 1e-3)
-        v4s = np.arange(100e-3, 240e-3, 1e-3)
+        v2s: np.ndarray[tuple[int], np.dtype[np.float64]] = np.arange(700e-3, 1., 1e-2)
+        v1s: np.ndarray[tuple[int], np.dtype[np.float64]] = np.arange(10e-3, 2., 1e-2)
+        v3s: np.ndarray[tuple[int], np.dtype[np.float64]] = np.arange(0, 2.5e-1, 1e-2)
+        v4s: np.ndarray[tuple[int], np.dtype[np.float64]] = np.arange(100e-3, 240e-3, 1e-3)
         l: int = len(v1s) * len(v2s) * len(v3s) * len(v4s)
         plist: list[np.ndarray[tuple[int], np.dtype[Any]]] = []
         bksps: str = ''
