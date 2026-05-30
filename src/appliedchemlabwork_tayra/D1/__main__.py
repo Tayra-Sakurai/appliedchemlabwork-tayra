@@ -10,15 +10,37 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-o', '--optimize', help='Optimizes for minimumn experiment time.', action='store_true')
+    parser.add_argument(
+        '-o',
+        '--optimize',
+        help='Optimizes for minimumn experiment time.',
+        action='store_true'
+    )
     args = parser.parse_args()
     try:
-        v2s: np.ndarray[tuple[int], np.dtype[np.float64]] = np.arange(700e-3, 1., 1e-2)
-        v1s: np.ndarray[tuple[int], np.dtype[np.float64]] = np.arange(10e-3, 2., 1e-2)
-        v3s: np.ndarray[tuple[int], np.dtype[np.float64]] = np.arange(0, 2.5e-1, 1e-2)
-        v4s: np.ndarray[tuple[int], np.dtype[np.float64]] = np.arange(100e-3, 240e-3, 1e-3)
+        v2s: np.ndarray[
+            tuple[int],
+            np.dtype[np.float64]
+        ] = np.arange(700e-3, 1., 1e-2)
+        v1s: np.ndarray[
+            tuple[int],
+            np.dtype[np.float64]
+        ] = np.arange(10e-3, 2., 1e-2)
+        v3s: np.ndarray[
+            tuple[int],
+            np.dtype[np.float64]
+        ] = np.arange(0, 2.5e-1, 1e-2)
+        v4s: np.ndarray[
+            tuple[int],
+            np.dtype[np.float64]
+        ] = np.arange(100e-3, 240e-3, 1e-3)
         l: int = len(v1s) * len(v2s) * len(v3s) * len(v4s)
-        plist: list[tuple[np.float64, np.ndarray[tuple[int], np.dtype[Any]]]] = []
+        plist: list[
+            tuple[
+                np.float64,
+                np.ndarray[tuple[int], np.dtype[Any]]
+            ]
+        ] = []
         bksps: str = ''
         cnt: int = 0
         for v1 in v1s.flat:

@@ -8,3 +8,4 @@ hatch>=1.16.5
 pandas>=3.0.3
 scipy>=1.17.1
 pyQt6>=6.11
+flake8>=7.3
