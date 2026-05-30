@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>appliedchemlabwork_tayra.D1.ReactionData &#8212; AppliedChemLabWork-tayra 0.0.20 documentation</title>
+    <title>appliedchemlabwork_tayra.D1.calc_k_and_a &#8212; AppliedChemLabWork-tayra 0.0.20 documentation</title>
   
   
   
@@ -41,12 +41,12 @@
     <script src="../_static/documentation_options.js?v=056c92e6"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'generated/appliedchemlabwork_tayra.D1.ReactionData';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'generated/appliedchemlabwork_tayra.D1.calc_k_and_a';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="appliedchemlabwork_tayra.D1.calc_k_and_a" href="appliedchemlabwork_tayra.D1.calc_k_and_a.html" />
-    <link rel="prev" title="appliedchemlabwork_tayra.D1 package" href="../appliedchemlabwork_tayra.D1.html" />
+    <link rel="next" title="appliedchemlabwork_tayra.D1.calc_ln" href="appliedchemlabwork_tayra.D1.calc_ln.html" />
+    <link rel="prev" title="appliedchemlabwork_tayra.D1.ReactionData" href="appliedchemlabwork_tayra.D1.ReactionData.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -276,8 +276,8 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="../appliedchemlabwork_tayra.D1.html">appliedchemlabwork_tayra.D1 package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">appliedchemlabwork_tayra.D1.ReactionData</a></li>
-<li class="toctree-l3"><a class="reference internal" href="appliedchemlabwork_tayra.D1.calc_k_and_a.html">appliedchemlabwork_tayra.D1.calc_k_and_a</a></li>
+<li class="toctree-l3"><a class="reference internal" href="appliedchemlabwork_tayra.D1.ReactionData.html">appliedchemlabwork_tayra.D1.ReactionData</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">appliedchemlabwork_tayra.D1.calc_k_and_a</a></li>
 <li class="toctree-l3"><a class="reference internal" href="appliedchemlabwork_tayra.D1.calc_ln.html">appliedchemlabwork_tayra.D1.calc_ln</a></li>
 <li class="toctree-l3"><a class="reference internal" href="appliedchemlabwork_tayra.D1.calc_required_amount_hcl.html">appliedchemlabwork_tayra.D1.calc_required_amount_hcl</a></li>
 <li class="toctree-l3"><a class="reference internal" href="appliedchemlabwork_tayra.D1.calc_concentration.html">appliedchemlabwork_tayra.D1.calc_concentration</a></li>
@@ -335,7 +335,7 @@
     
     <li class="breadcrumb-item"><a href="../appliedchemlabwork_tayra.D1.html" class="nav-link">appliedchemlabwork_tayra.D1 package</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">appliedchemlabwork_tayra.D1.ReactionData</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">appliedchemlabwork_tayra.D1.calc_k_and_a</span></li>
   </ul>
 </nav>
 </div>
@@ -352,71 +352,49 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="appliedchemlabwork-tayra-d1-reactiondata">
-<h1>appliedchemlabwork_tayra.D1.ReactionData<a class="headerlink" href="#appliedchemlabwork-tayra-d1-reactiondata" title="Link to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="appliedchemlabwork_tayra.D1.ReactionData">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">appliedchemlabwork_tayra.D1.</span></span><span class="sig-name descname"><span class="pre">ReactionData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">floating</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">floating</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">floating</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/appliedchemlabwork_tayra/D1/_calc_data.html#ReactionData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#appliedchemlabwork_tayra.D1.ReactionData" title="Link to this definition">#</a></dt>
-<dd><p>Class to contain the data of reaction.</p>
+  <section id="appliedchemlabwork-tayra-d1-calc-k-and-a">
+<h1>appliedchemlabwork_tayra.D1.calc_k_and_a<a class="headerlink" href="#appliedchemlabwork-tayra-d1-calc-k-and-a" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="appliedchemlabwork_tayra.D1.calc_k_and_a">
+<span class="sig-prename descclassname"><span class="pre">appliedchemlabwork_tayra.D1.</span></span><span class="sig-name descname"><span class="pre">calc_k_and_a</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">floating</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/appliedchemlabwork_tayra/D1/_calc_data.html#calc_k_and_a"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#appliedchemlabwork_tayra.D1.calc_k_and_a" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the rate constant.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>temp</strong><span class="classifier">float | floating[Any]</span></dt><dd><p>The absolute temperture of the reaction.</p>
-</dd>
-<dt><strong>k</strong><span class="classifier">float | floating[Any]</span></dt><dd><p>The pace coefficient of the reaction at the temperture of <code class="docutils literal notranslate"><span class="pre">temp</span></code>.</p>
-</dd>
-<dt><strong>e_a</strong><span class="classifier">float | floating[Any]</span></dt><dd><p>The activation energy of the reaction.</p>
+<dt><strong>df</strong><span class="classifier">DataFrame</span></dt><dd><p>The data.</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>a</strong><span class="classifier">float | floating[Any]</span></dt><dd><p>The frequency factor of the reaction.</p>
+<dt><strong>k</strong><span class="classifier">float64</span></dt><dd><p>The rate constant.</p>
 </dd>
 </dl>
 </dd>
 </dl>
-<p class="rubric">Methods</p>
+<p class="rubric">Notes</p>
+<p>The table data must follow the following style.</p>
 <div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Time</p></th>
+<th class="head"><p>Concentration of the base</p></th>
+</tr>
+</thead>
 <tbody>
-<tr class="row-odd"><td><p><strong>get_k(temp=298.15)</strong></p></td>
-<td><p>Gets the pace coefficient at the absolute temperture <code class="docutils literal notranslate"><span class="pre">temp</span></code>.</p></td>
+<tr class="row-even"><td><p>30</p></td>
+<td><p>0.0153</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>to_df()</strong></p></td>
-<td><p>Generates a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p></td>
+<tr class="row-odd"><td><p>320</p></td>
+<td><p>0.0123</p></td>
 </tr>
-</tbody>
-</table>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="appliedchemlabwork_tayra.D1.ReactionData.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">floating</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">floating</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">floating</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/appliedchemlabwork_tayra/D1/_calc_data.html#ReactionData.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#appliedchemlabwork_tayra.D1.ReactionData.__init__" title="Link to this definition">#</a></dt>
-<dd><p>Initializes the class.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>temp</strong><span class="classifier">float | floating[Any]</span></dt><dd><p>The tempreture.</p>
-</dd>
-<dt><strong>k</strong><span class="classifier">float | floating[Any]</span></dt><dd><p>The coefficient at <code class="docutils literal notranslate"><span class="pre">temp</span></code>.</p>
-</dd>
-<dt><strong>e_a</strong><span class="classifier">float | floating[Any]</span></dt><dd><p>The activation energy.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#appliedchemlabwork_tayra.D1.ReactionData.__init__" title="appliedchemlabwork_tayra.D1.ReactionData.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(temp, k, e_a)</p></td>
-<td><p>Initializes the class.</p></td>
+<tr class="row-even"><td><p>640</p></td>
+<td><p>0.0103</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_k</span></code>([temp])</p></td>
-<td><p>Gets the pace coefficientat the temperture of <code class="docutils literal notranslate"><span class="pre">temp</span></code>.</p></td>
+<tr class="row-odd"><td><p>1000</p></td>
+<td><p>0.0089</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_df</span></code>()</p></td>
-<td><p>Outputs the data as a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p></td>
+<tr class="row-even"><td><p>…</p></td>
+<td><p>…</p></td>
 </tr>
 </tbody>
 </table>
@@ -436,20 +414,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../appliedchemlabwork_tayra.D1.html"
+       href="appliedchemlabwork_tayra.D1.ReactionData.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">appliedchemlabwork_tayra.D1 package</p>
+        <p class="prev-next-title">appliedchemlabwork_tayra.D1.ReactionData</p>
       </div>
     </a>
     <a class="right-next"
-       href="appliedchemlabwork_tayra.D1.calc_k_and_a.html"
+       href="appliedchemlabwork_tayra.D1.calc_ln.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">appliedchemlabwork_tayra.D1.calc_k_and_a</p>
+        <p class="prev-next-title">appliedchemlabwork_tayra.D1.calc_ln</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -472,17 +450,14 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appliedchemlabwork_tayra.D1.ReactionData"><code class="docutils literal notranslate"><span class="pre">ReactionData</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#appliedchemlabwork_tayra.D1.ReactionData.__init__"><code class="docutils literal notranslate"><span class="pre">ReactionData.__init__()</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appliedchemlabwork_tayra.D1.calc_k_and_a"><code class="docutils literal notranslate"><span class="pre">calc_k_and_a()</span></code></a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../_sources/generated/appliedchemlabwork_tayra.D1.ReactionData.rst.txt">
+    <a href="../_sources/generated/appliedchemlabwork_tayra.D1.calc_k_and_a.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

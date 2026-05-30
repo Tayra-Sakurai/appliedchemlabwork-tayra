@@ -6,7 +6,7 @@ from scipy.constants import R
 import numpy.typing as npt
 import math
 
-__all__ = ['ReactionData', 'calc_k', 'calc_ln']
+__all__ = ['ReactionData', 'calc_k_and_a', 'calc_ln']
 
 
 class ReactionData:
