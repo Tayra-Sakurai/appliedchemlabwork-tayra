@@ -150,9 +150,9 @@ def calc_ln(
         return np.log(f) / bi
 
 
-def calc_k(
+def calc_k_and_a(
     df: pandas.DataFrame
-) -> np.float64:
+) -> npt.NDArray[np.floating[Any]]:
     """Calculates the rate constant.
 
     Parameters
@@ -190,6 +190,6 @@ def calc_k(
     bi = df.iloc[-1, 1]
     if isinstance(bi, np.floating):
         ls = calc_ln(base.to_numpy(), bi)
-        return np.polynomial.polynomial.polyfit(t.to_numpy(), ls, deg=1)[1]
+        return np.polynomial.polynomial.polyfit(t.to_numpy(), ls, deg=1)
     else:
         raise TypeError('Invalid type.')
