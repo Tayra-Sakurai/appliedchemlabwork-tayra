@@ -162,8 +162,10 @@ def calc_k_and_a(
 
     Returns
     -------
-    k : float64
-        The rate constant.
+    values : NDArray[floating[Any]]
+        The value set of the result
+        where the first column indicates the value of constant and
+        the second one is the coefficient.
 
     Notes
     -----
