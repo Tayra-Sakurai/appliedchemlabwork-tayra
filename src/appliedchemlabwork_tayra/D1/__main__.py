@@ -29,6 +29,7 @@ class CWidget(QWidget):
         )
 
         layout.addRow(btn, selectionBtn)
+        self.setLayout(layout)
 
     def show_dialog(self):
         fileDialog = QFileDialog(
