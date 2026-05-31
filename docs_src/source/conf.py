@@ -9,7 +9,7 @@
 project = 'AppliedChemLabWork-tayra'
 copyright = '2026, Tayra Sakurai'
 author = 'Tayra Sakurai'
-release = '0.0.23'
+release = '0.0.24'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

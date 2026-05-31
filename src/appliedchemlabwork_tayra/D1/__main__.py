@@ -27,6 +27,9 @@ class CWidget(QWidget):
         selectionBtn.clicked.connect(
             lambda: self.filepathInput.setText(self.show_dialog())
         )
+        btn.clicked.connect(
+            self.process_submit
+        )
 
         layout.addRow(btn, selectionBtn)
         self.setLayout(layout)
@@ -50,7 +53,7 @@ class CWidget(QWidget):
     def process_submit(self):
         df = pandas.read_csv(self.filepathInput.text(), encoding='utf_8_sig')
         data = calc_k_and_a(df)
-        df2 = pandas.DataFrame(data, columns=('k', 'a'))
+        df2 = pandas.DataFrame(data, index=('k', 'a'))
         self.save_to_file(df2)
 
     def save_to_file(self, df: pandas.DataFrame):
