@@ -6,6 +6,71 @@ import numpy as np
 from ._pattern_match import check_match
 import random
 import argparse
+from PyQt6.QtWidgets import QFileDialog, QMainWindow, QWidget, QLabel, QLineEdit, QFormLayout, QPushButton, QApplication
+from PyQt6.QtCore import QDir
+from ._calc_data import *
+import pandas
+import sys
+
+
+class CWidget(QWidget):
+    def __init__(self, parent: QWidget | None = None):
+        super().__init__(parent)
+        
+        layout = QFormLayout()
+        self.filepathInput = QLineEdit(self)
+        self.filepathInput.setReadOnly(True)
+        label = QLabel("CSV File path", self)
+        layout.addRow(label, self.filepathInput)
+        btn = QPushButton('Submit', self)
+        selectionBtn = QPushButton('Select CSV file.', self)
+        selectionBtn.clicked.connect(
+            lambda: self.filepathInput.setText(self.show_dialog())
+        )
+
+        layout.addRow(btn, selectionBtn)
+
+    def show_dialog(self):
+        fileDialog = QFileDialog(
+            self,
+            filter="CSV Files (*.csv *.txt)"
+        )
+        fileDialog.setViewMode(QFileDialog.ViewMode.Detail)
+        fileDialog.setFileMode(QFileDialog.FileMode.ExistingFile)
+        fileDialog.setWindowTitle('Please select a CSV file.')
+        fileDialog.setAcceptMode(QFileDialog.AcceptMode.AcceptOpen)
+        fileDialog.setAcceptDrops(True)
+        fileDialog.setDefaultSuffix('.csv')
+        fileDialog.setDirectory(QDir.home())
+        if fileDialog.exec():
+            return fileDialog.selectedFiles()[0]
+        return ''
+    
+    def process_submit(self):
+        df = pandas.read_csv(self.filepathInput.text())
+        data = calc_k_and_a(df)
+        df2 = pandas.DataFrame(data, columns=('k', 'a'))
+        self.save_to_file(df2)
+
+    def save_to_file(self, df: pandas.DataFrame):
+        filepath, _ = QFileDialog.getSaveFileName(
+            self,
+            'Save file.',
+            QDir.homePath(),
+            'CSV File (*.csv)'
+        )
+        df.to_csv(
+            filepath,
+            encoding='utf_8_sig'
+        )
+
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Main Window")
+        self.setGeometry(100, 100, 400, 300)
+        self.setCentralWidget(CWidget(self))
 
 
 def main():
@@ -69,6 +134,11 @@ def main():
             ])
             mindex: np.intp = np.argmin(th_array)
             print(plist[mindex][1])
+        app = QApplication(sys.argv)
+        win = MainWindow()
+        win.show()
+
+        sys.exit(app.exec())
 
 
 if __name__ == '__main__':
