@@ -48,7 +48,7 @@ class CWidget(QWidget):
         return ''
     
     def process_submit(self):
-        df = pandas.read_csv(self.filepathInput.text())
+        df = pandas.read_csv(self.filepathInput.text(), encoding='utf_8_sig')
         data = calc_k_and_a(df)
         df2 = pandas.DataFrame(data, columns=('k', 'a'))
         self.save_to_file(df2)
