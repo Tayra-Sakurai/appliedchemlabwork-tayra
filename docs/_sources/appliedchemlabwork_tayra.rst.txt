@@ -8,8 +8,8 @@ Subpackages
    :maxdepth: 4
 
    appliedchemlabwork_tayra.B1
-   appliedchemlabwork_tayra.common
    appliedchemlabwork_tayra.D1
+   appliedchemlabwork_tayra.common
 
 Module contents
 ---------------

@@ -7,12 +7,15 @@
    :toctree: generated/
 
    ReactionData
+   calc_concentration
    calc_k_and_a
+   calc_k_from_data
+   calc_left
    calc_ln
    calc_required_amount_hcl
-   calc_concentration
    check_match
 """
 from ._calc_conditions import *
 from ._pattern_match import *
 from ._calc_data import *
+from ._calc_process import *

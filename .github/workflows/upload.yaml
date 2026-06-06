@@ -1,4 +1,4 @@
-name: Upload project to PyPI
+name: Upload project
 
 on:
   push:
@@ -26,4 +26,22 @@ jobs:
       - name: Upload the artifacts
         uses: actions/upload-artifact@v7
         with:
-          path: dist/
+          path: dist/*
+
+  generate_document:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+
+      - name: Install Sphinx
+        run: pip install -r requirements.txt
+
+      - run: sphinx-build -b latex docs_src/source builds
+
+      - uses: actions/upload-artifact@v7
+        with:
+          path: builds/

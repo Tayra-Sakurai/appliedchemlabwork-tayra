@@ -9,7 +9,11 @@
 project = 'AppliedChemLabWork-tayra'
 copyright = '2026, Tayra Sakurai'
 author = 'Tayra Sakurai'
-release = '0.0.25'
+release = '0.0.26'
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path('..', '..', 'src').resolve()))
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
