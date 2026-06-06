@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026-present Tayra Sakurai <tayra_sakurai@icloud.com>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
-from PyQt6.QtCore import Qt, pyqtSlot, QStandardPaths
+from PyQt6.QtCore import Qt, QStandardPaths
 from PyQt6.QtWidgets import QWidget, QFormLayout, QLineEdit, QLabel, QMainWindow, QPushButton, QFileDialog, QGroupBox, QStackedLayout, QSlider, QProgressDialog
 import os
 from ._pattern_match import check_match
@@ -97,6 +97,9 @@ class _MainWidget(QWidget):
 
         sLayout.addWidget(g1)
 
+        self.superBtn = QPushButton('結果を計算する', self)
+        sLayout.addWidget(self.superBtn)
+
     def _file_pick(self, i: QLineEdit):
         fName, _ = QFileDialog.getOpenFileName(
             self,
@@ -107,12 +110,10 @@ class _MainWidget(QWidget):
         i.setText(fName)
 
     def _fpick(self, i: QLineEdit):
-        @pyqtSlot
-        def _func(self):
+        def _func():
             return self._file_pick(i)
         return _func
-    
-    @pyqtSlot
+
     def _predict(self):
         xrange = np.arange(self.test_min_slider.value(), self.test_max_slider.value(), 10)
         yrange = np.arange(self.test_water_min_slider.value(), self.test_water_max_slider.value(), 5)
