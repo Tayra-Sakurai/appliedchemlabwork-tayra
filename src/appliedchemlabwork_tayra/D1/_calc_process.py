@@ -218,7 +218,6 @@ def calc_left(
     -----
     The value :math:`v` is equivalent to
     .. math::
-
        v ={} \\ln \\frac{a \\left( b -{} x \\right)}{b \\left( a -{} x \\right)}
     """
     up = a * (b - x)
