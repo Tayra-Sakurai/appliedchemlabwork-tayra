@@ -46,7 +46,7 @@ jobs:
       - name: Install Sphinx
         run: pip install -r requirements.txt
 
-      - run: sphinx-build -b latex docs_src/source builds
+      - run: sphinx-build -b html docs_src/source builds
 
       - uses: actions/upload-artifact@v7
         with:
