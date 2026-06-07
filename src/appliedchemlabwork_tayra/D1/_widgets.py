@@ -8,6 +8,7 @@ from ._pattern_match import check_match
 import numpy as np
 from typing import Any
 import pandas
+from ._threads import FindThread
 
 __all__ = ['_MainWindow']
 
@@ -93,12 +94,39 @@ class _MainWidget(QWidget):
 
         self.submit_btn = QPushButton('送信', g1)
         submit_btn_label = QLabel('送信', g1)
+        self.submit_btn.clicked.connect(self._predict)
         g1Layout.addRow(submit_btn_label, self.submit_btn)
 
         sLayout.addWidget(g1)
 
         self.superBtn = QPushButton('結果を計算する', self)
         sLayout.addWidget(self.superBtn)
+
+        self.progress = QProgressDialog(
+            'Process...',
+            'Cancel',
+            0,
+            100,
+            self
+        )
+        self.progress.setAutoClose(True)
+        self.progress.setAutoReset(True)
+
+        self.qThread = FindThread(
+            self,
+            self.test_water_min_slider,
+            self.test_water_max_slider,
+            self.test_min_slider,
+            self.test_max_slider,
+            self.test_r_water_min_slider,
+            self.test_r_water_max_slider,
+            self.test_r_naoh_min_slider,
+            self.test_r_naoh_max_slider
+        )
+
+        self.qThread.started.connect(
+            self._progressSet
+        )
 
     def _file_pick(self, i: QLineEdit):
         fName, _ = QFileDialog.getOpenFileName(
@@ -113,60 +141,35 @@ class _MainWidget(QWidget):
         def _func():
             return self._file_pick(i)
         return _func
-
+    
     def _predict(self):
-        xrange = np.arange(self.test_min_slider.value(), self.test_max_slider.value(), 10)
-        yrange = np.arange(self.test_water_min_slider.value(), self.test_water_max_slider.value(), 5)
-        zrange = np.arange(
-            self.test_r_water_min_slider.value(),
-            self.test_r_water_max_slider.value(),
-            5
-        )
-        urange = np.arange(
-            self.test_r_naoh_min_slider.value(),
-            self.test_r_naoh_max_slider.value(),
-            5
-        )
-        maximum = xrange.size * yrange.size * zrange.size * urange.size
-        i: int = 0
-        results: list[tuple[np.integer[Any], np.integer[Any], np.integer[Any], np.integer[Any], np.float64]] = []
-        progress = QProgressDialog(
-            '進行中...',
-            'キャンセル',
-            0,
-            maximum,
-            self
-        )
-        progress.setAutoClose(True)
-        progress.setAutoReset(True)
-        progress.show()
-        for x in xrange:
-            for y in yrange:
-                for z in zrange:
-                    for u in urange:
-                        i += 1
-                        progress.setValue(i)
-                        match, th_cold = check_match(y / 1000, x / 1000, z / 1000, u / 1000)
-                        if match:
-                            results.append((y, x, z, u, th_cold))
-        data = np.array(results, dtype=np.float64)
-        df = pandas.DataFrame(
-            data=data.T,
-            columns=(
-                '酢エチに加える水の体積 / mL',
-                '6 M NaOH aq に加える水の体積 / mL',
-                '反応液に加える水の体積 / mL',
-                '反応液として使用する薄めた NaOH aq の体積 / mL',
-                '低温 (274 K) での半減期 / s'
-            )
-        )
-        sFName, _ = QFileDialog.getSaveFileName(
+        self.progress.show()
+        self.qThread.start()
+
+    def _progressSet(
+        self,
+        arg: int | np.integer[Any]
+    ):
+        self.progress.setMaximum(int(arg))
+
+    def _progressStep(
+        self,
+        i: int
+    ):
+        self.progress.setValue(i)
+
+    def _save_data(
+        self,
+        df: pandas.DataFrame
+    ):
+        fName, _ = QFileDialog.getSaveFileName(
             self,
-            '保存するファイル名を指定',
+            'Save as...',
             QStandardPaths.writableLocation(QStandardPaths.StandardLocation.DocumentsLocation),
+            'CSV, UTF-8 (*.csv)',
             'CSV, UTF-8 (*.csv)'
         )
         df.to_csv(
-            sFName,
+            fName,
             encoding='utf_8_sig'
         )

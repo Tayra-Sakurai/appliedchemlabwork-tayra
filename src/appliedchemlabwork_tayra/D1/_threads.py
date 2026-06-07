@@ -1,0 +1,99 @@
+# SPDX-FileCopyrightText: 2026-present Tayra Sakurai <tayra_sakurai@icloud.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+from PyQt6.QtCore import QObject, QThread, pyqtSignal
+from PyQt6.QtWidgets import QSlider
+import numpy as np
+from ._pattern_match import *
+from typing import Any
+import pandas
+__all__ = ['FindThread']
+
+
+class FindThread(QThread):
+    stepped = pyqtSignal(int)
+    ended = pyqtSignal(pandas.DataFrame)
+    started = pyqtSignal(int | np.integer[Any])
+
+    def __init__(
+        self,
+        parent: QObject,
+        xmin: QSlider,
+        xmax: QSlider,
+        ymin: QSlider,
+        ymax: QSlider,
+        zmin: QSlider,
+        zmax: QSlider,
+        umin: QSlider,
+        umax: QSlider
+    ) -> None:
+        super().__init__(parent)
+        (
+            self.xmin,
+            self.xmax,
+            self.ymin,
+            self.ymax,
+            self.zmin,
+            self.zmax,
+            self.umin,
+            self.umax,
+        ) = (
+            xmin,
+            xmax,
+            ymin,
+            ymax,
+            zmin,
+            zmax,
+            umin,
+            umax,
+        )
+
+    def run(self) -> None:
+        xrange = np.arange(self.xmin.value(), self.xmax.value(), 5)
+        yrange = np.arange(self.ymin.value(), self.ymax.value(), 5)
+        zrange = np.arange(self.zmin.value(), self.zmax.value(), 5)
+        urange = np.arange(self.umin.value(), self.umax.value(), 5)
+        size = np.prod((xrange.size, yrange.size, zrange.size, urange.size))
+        self.started.emit(size)
+        i: int = 0
+        results: list[
+            tuple[
+                np.integer[Any],
+                np.integer[Any],
+                np.integer[Any],
+                np.integer[Any],
+                np.float64
+            ]
+        ] = []
+        for x in xrange:
+            for y in yrange:
+                for z in zrange:
+                    for u in urange:
+                        i += 1
+                        self.stepped.emit(i)
+                        xl = x / 1000
+                        yl = y / 1000
+                        zl = z / 1000
+                        ul = u / 1000
+                        c, th = check_match(xl, yl, zl, ul)
+                        if c:
+                            results.append((
+                                x,
+                                y,
+                                z,
+                                u,
+                                th
+                            ))
+        rarray = np.array(results, dtype=np.float64)
+        self.ended.emit(
+            pandas.DataFrame(
+                data=rarray.T,
+                columns=(
+                    '酢エチに加える水の体積 / mL',
+                    '6 M NaOH に加える水の体積 / mL',
+                    '反応液に加える水量 / mL',
+                    '反応液に加える NaOH 希釈液の体積 / mL',
+                    '半減期 (274 K) / s',
+                )
+            )
+        )
