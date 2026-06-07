@@ -13,7 +13,7 @@ __all__ = ['FindThread']
 class FindThread(QThread):
     stepped = pyqtSignal(int)
     ended = pyqtSignal(pandas.DataFrame)
-    started = pyqtSignal(int | np.integer[Any])
+    started = pyqtSignal(np.integer[Any])
 
     def __init__(
         self,
@@ -87,7 +87,7 @@ class FindThread(QThread):
         rarray = np.array(results, dtype=np.float64)
         self.ended.emit(
             pandas.DataFrame(
-                data=rarray.T,
+                data=rarray,
                 columns=(
                     '酢エチに加える水の体積 / mL',
                     '6 M NaOH に加える水の体積 / mL',

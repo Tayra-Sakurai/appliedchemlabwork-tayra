@@ -4,7 +4,6 @@
 from PyQt6.QtCore import Qt, QStandardPaths
 from PyQt6.QtWidgets import QWidget, QFormLayout, QLineEdit, QLabel, QMainWindow, QPushButton, QFileDialog, QGroupBox, QStackedLayout, QSlider, QProgressDialog
 import os
-from ._pattern_match import check_match
 import numpy as np
 from typing import Any
 import pandas
@@ -148,7 +147,7 @@ class _MainWidget(QWidget):
 
     def _progressSet(
         self,
-        arg: int | np.integer[Any]
+        arg: np.integer[Any]
     ):
         self.progress.setMaximum(int(arg))
 
