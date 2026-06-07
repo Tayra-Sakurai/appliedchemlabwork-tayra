@@ -147,9 +147,9 @@ class _MainWidget(QWidget):
 
     def _progressSet(
         self,
-        arg: np.integer[Any]
+        arg: int
     ):
-        self.progress.setMaximum(int(arg))
+        self.progress.setMaximum(arg)
 
     def _progressStep(
         self,

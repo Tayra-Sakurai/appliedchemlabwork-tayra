@@ -13,7 +13,7 @@ __all__ = ['FindThread']
 class FindThread(QThread):
     stepped = pyqtSignal(int)
     ended = pyqtSignal(pandas.DataFrame)
-    started = pyqtSignal(np.integer[Any])
+    started = pyqtSignal(int)
 
     def __init__(
         self,
@@ -54,7 +54,7 @@ class FindThread(QThread):
         zrange = np.arange(self.zmin.value(), self.zmax.value(), 5)
         urange = np.arange(self.umin.value(), self.umax.value(), 5)
         size = np.prod((xrange.size, yrange.size, zrange.size, urange.size))
-        self.started.emit(size)
+        self.started.emit(int(size))
         i: int = 0
         results: list[
             tuple[
