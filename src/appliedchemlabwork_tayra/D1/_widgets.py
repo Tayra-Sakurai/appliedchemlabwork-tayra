@@ -41,7 +41,7 @@ class _MainWidget(QWidget):
         p1Label = QLabel('Or', g1)
         g1Layout.addRow(p1Label, self.p1)
 
-        doubleValidation = QDoubleValidator(-2048., 2047., 3)
+        doubleValidation = QDoubleValidator(-2048., 2047., 6)
 
         self.test_min_slider = QSlider(Qt.Orientation.Horizontal, g1)
         self.test_max_slider = QSlider(Qt.Orientation.Horizontal, g1)
@@ -186,9 +186,9 @@ class _MainWidget(QWidget):
     def _file_pick(self, i: QLineEdit):
         fName, _ = QFileDialog.getOpenFileName(
             self,
-            'CSV ファイルを選択',
-            os.curdir,
-            'CSV ファイル コンマ区切り UTF-8 (*.csv)'
+            caption='CSV ファイルを選択',
+            directory=os.curdir,
+            filter='CSV ファイル コンマ区切り UTF-8 (*.csv)',
         )
         i.setText(fName)
 
@@ -231,7 +231,8 @@ class _MainWidget(QWidget):
         aThread = AnalyzeThread(
             pandas.read_csv(
                 self.v_t_t_path_input.text(),
-                encoding='utf_8_sig'
+                header=None,
+                encoding='utf_8_sig',
             ),
             float(self.v_hcl_input.text()),
             float(self.v_r_input.text()),
