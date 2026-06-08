@@ -180,6 +180,8 @@ class _MainWidget(QWidget):
         self.qThread.started.connect(
             self._progressSet
         )
+        self.qThread.stepped.connect(self._progressStep)
+        self.qThread.ended.connect(self._save_data)
 
     def _file_pick(self, i: QLineEdit):
         fName, _ = QFileDialog.getOpenFileName(
