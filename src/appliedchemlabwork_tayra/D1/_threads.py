@@ -7,7 +7,8 @@ import numpy as np
 from ._pattern_match import *
 from typing import Any
 import pandas
-__all__ = ['FindThread']
+from ._calc_process import calc_k_from_data
+__all__ = ['FindThread', 'AnalyzeThread']
 
 
 class FindThread(QThread):
@@ -76,6 +77,7 @@ class FindThread(QThread):
                         zl = z / 1000
                         ul = u / 1000
                         c, th = check_match(xl, yl, zl, ul)
+                        print(c, i, size)
                         if c:
                             results.append((
                                 x,
@@ -97,3 +99,43 @@ class FindThread(QThread):
                 )
             )
         )
+
+class AnalyzeThread(QThread):
+    ended = pyqtSignal(pandas.DataFrame)
+
+    def __init__(
+        self,
+        v_t_and_t: pandas.DataFrame,
+        v_hcl: float,
+        v_r: float,
+        c_base: float,
+        c_hcl: float,
+        a: float,
+        b: float,
+        k_pred: float,
+        parent: QObject | None = None,
+    ) -> None:
+        super().__init__(parent)
+        (
+            self.v_t_and_t,
+            self.v_hcl,
+            self.v_r,
+            self.c_base,
+            self.c_hcl,
+            self.a,
+            self.b,
+            self.k_pred,
+        ) = (
+            v_t_and_t,
+            v_hcl,
+            v_r,
+            c_base,
+            c_hcl,
+            a,
+            b,
+            k_pred,
+        )
+
+    def run(self) -> None:
+        df = calc_k_from_data(self.k_pred, self.v_r, self.v_hcl, self.c_base, self.c_hcl, self.a, self.b, self.v_t_and_t)
+        self.ended.emit(df)

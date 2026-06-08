@@ -2,12 +2,11 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 from PyQt6.QtCore import Qt, QStandardPaths
-from PyQt6.QtWidgets import QWidget, QFormLayout, QLineEdit, QLabel, QMainWindow, QPushButton, QFileDialog, QGroupBox, QStackedLayout, QSlider, QProgressDialog
+from PyQt6.QtGui import QDoubleValidator
+from PyQt6.QtWidgets import QWidget, QFormLayout, QLineEdit, QLabel, QMainWindow, QPushButton, QFileDialog, QGroupBox, QVBoxLayout, QSlider, QProgressDialog
 import os
-import numpy as np
-from typing import Any
 import pandas
-from ._threads import FindThread
+from ._threads import *
 
 __all__ = ['_MainWindow']
 
@@ -29,18 +28,20 @@ class _MainWidget(QWidget):
         flags: Qt.WindowType = Qt.WindowType.Widget
     ) -> None:
         super().__init__(parent, flags)
-        sLayout = QStackedLayout(self)
+        sLayout = QVBoxLayout(self)
 
         g1 = QGroupBox(self)
         g1Layout = QFormLayout(g1)
         g1.setTitle('予習用ツール')
         self.dataFilePathInput = QLineEdit(g1)
         dataFileLabel = QLabel('Data File Path', g1)
-        g1Layout.addRow(self.dataFilePathInput, dataFileLabel)
+        g1Layout.addRow(dataFileLabel, self.dataFilePathInput)
         self.p1 = QPushButton('Or pick a CSV file.', g1)
         self.p1.clicked.connect(self._fpick(self.dataFilePathInput))
         p1Label = QLabel('Or', g1)
         g1Layout.addRow(p1Label, self.p1)
+
+        doubleValidation = QDoubleValidator(-2048., 2047., 3)
 
         self.test_min_slider = QSlider(Qt.Orientation.Horizontal, g1)
         self.test_max_slider = QSlider(Qt.Orientation.Horizontal, g1)
@@ -96,10 +97,63 @@ class _MainWidget(QWidget):
         self.submit_btn.clicked.connect(self._predict)
         g1Layout.addRow(submit_btn_label, self.submit_btn)
 
-        sLayout.addWidget(g1)
+        sLayout.insertWidget(0, g1)
 
-        self.superBtn = QPushButton('結果を計算する', self)
-        sLayout.addWidget(self.superBtn)
+        g2 = QGroupBox(self)
+        g2Layout = QFormLayout(g2)
+
+        self.k_pred_input = QLineEdit(g2)
+        self.k_pred_input.setValidator(doubleValidation)
+        k_pred_label = QLabel('k の予想値', g2)
+        g2Layout.addRow(k_pred_label, self.k_pred_input)
+
+        self.a_input = QLineEdit(g2)
+        self.a_input.setValidator(doubleValidation)
+        a_label = QLabel('a の予測値 / M', g2)
+        g2Layout.addRow(a_label, self.a_input)
+
+        self.b_input = QLineEdit(g2)
+        self.b_input.setValidator(doubleValidation)
+        b_label = QLabel('b の予測値 / M', g2)
+        g2Layout.addRow(b_label, self.b_input)
+
+        self.c_hcl_input = QLineEdit(g2)
+        self.c_hcl_input.setValidator(doubleValidation)
+        c_hcl_label = QLabel('塩酸のモル濃度 / M', g2)
+        g2Layout.addRow(c_hcl_label, self.c_hcl_input)
+
+        self.c_base_input = QLineEdit(g2)
+        self.c_base_input.setValidator(doubleValidation)
+        c_base_label = QLabel('滴定に用いた塩基の濃度 / M')
+        g2Layout.addRow(c_base_label, self.c_base_input)
+
+        self.v_r_input = QLineEdit(g2)
+        self.v_r_input.setValidator(doubleValidation)
+        v_r_label = QLabel('反応液の分取量 / mL', g2)
+        g2Layout.addRow(v_r_label, self.v_r_input)
+
+        self.v_hcl_input = QLineEdit(g2)
+        self.v_hcl_input.setValidator(doubleValidation)
+        v_hcl_label = QLabel('塩酸の滴下量 / mL', g2)
+        g2Layout.addRow(v_hcl_label, self.v_hcl_input)
+
+        self.v_t_t_path_input = QLineEdit(g2)
+        v_t_t_path_label = QLabel('滴下量と時刻のデータファイル', g2)
+        g2Layout.addRow(v_t_t_path_label, self.v_t_t_path_input)
+
+        choose_btn = QPushButton('ファイルを選択', g2)
+        choose_btn.clicked.connect(self._fpick(self.v_t_t_path_input))
+        choose_label = QLabel('または', g2)
+        g2Layout.addRow(choose_label, choose_btn)
+
+        submit2 = QPushButton('送信', g2)
+        submit2.clicked.connect(self._analyze)
+        sl2 = QLabel('送信する', g2)
+        g2Layout.addRow(sl2, submit2)
+
+        g2.setTitle('結果の解析ツール')
+
+        sLayout.insertWidget(1, g2)
 
         self.progress = QProgressDialog(
             'Process...',
@@ -137,9 +191,7 @@ class _MainWidget(QWidget):
         i.setText(fName)
 
     def _fpick(self, i: QLineEdit):
-        def _func():
-            return self._file_pick(i)
-        return _func
+        return lambda: self._file_pick(i)
     
     def _predict(self):
         self.progress.show()
@@ -172,3 +224,21 @@ class _MainWidget(QWidget):
             fName,
             encoding='utf_8_sig'
         )
+
+    def _analyze(self):
+        aThread = AnalyzeThread(
+            pandas.read_csv(
+                self.v_t_t_path_input.text(),
+                encoding='utf_8_sig'
+            ),
+            float(self.v_hcl_input.text()),
+            float(self.v_r_input.text()),
+            float(self.c_base_input.text()),
+            float(self.c_hcl_input.text()),
+            float(self.a_input.text()),
+            float(self.b_input.text()),
+            float(self.k_pred_input.text()),
+            self
+        )
+        aThread.ended.connect(self._save_data)
+        aThread.start()
