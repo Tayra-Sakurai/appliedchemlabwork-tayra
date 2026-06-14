@@ -14,3 +14,4 @@ PySide6>=6.11.1
 qt6-tools>=6.5
 Setuptools>=82.0.1
 pytest>=9.0.3
+twine>=6.2
