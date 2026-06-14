@@ -238,7 +238,7 @@ class _MainWidget(QWidget):
                 self.v_t_t_path_input.text(),
                 header=None,
                 encoding='utf_8_sig',
-                index_col=1,
+                index_col=0,
             ),
             float(self.v_hcl_input.text()),
             float(self.v_r_input.text()),

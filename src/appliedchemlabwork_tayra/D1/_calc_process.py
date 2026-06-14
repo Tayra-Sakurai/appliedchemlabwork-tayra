@@ -131,6 +131,7 @@ def calc_k_from_data(
         np.dtype[np.floating[Any]]
     ]
     if isinstance(vt_or_table, pandas.DataFrame):
+        print(vt_or_table)
         timeSeries: pandas.Series[np.dtype[np.floating[Any]]] = vt_or_table.iloc[0]
         times = timeSeries.to_numpy()
         vts = vt_or_table.iloc[1].to_numpy()
