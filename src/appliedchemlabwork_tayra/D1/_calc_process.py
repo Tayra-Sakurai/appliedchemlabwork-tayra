@@ -2,13 +2,12 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 """The process calculators."""
-from scipy.optimize import least_squares
+from scipy.optimize import curve_fit
 import numpy as np
 from typing import Any, overload
 import pandas
-import numpy.typing as npt
 
-__all__ = ['calc_k_from_data', 'calc_left']
+__all__ = ['calc_k_from_data']
 
 
 @overload
@@ -24,6 +23,7 @@ def calc_k_from_data(
         tuple[int],
         np.dtype[np.floating[Any]]
     ],
+    v_t_inf: float | np.floating[Any],
     t: np.ndarray[
         tuple[int],
         np.dtype[np.floating[Any]]
@@ -41,7 +41,8 @@ def calc_k_from_data(
     c_hcl: float | np.floating[Any],
     a: float | np.floating[Any],
     b: float | np.floating[Any],
-    vt_or_table: pandas.DataFrame
+    vt_or_table: pandas.DataFrame,
+    v_t_inf: float | np.floating[Any]
 ) -> pandas.DataFrame:
     return pandas.DataFrame()
 
@@ -59,6 +60,7 @@ def calc_k_from_data(
         np.dtype[np.floating[Any]]
     ] |
     pandas.DataFrame,
+    v_t_inf: float | np.floating[Any],
     t: np.ndarray[
         tuple[int],
         np.dtype[np.number[Any, int | float]]
@@ -88,6 +90,8 @@ def calc_k_from_data(
         The table of time and titrated volume of the base,
         or an ``NDArray`` which represents the titrated volume
         of the base.
+    v_t_inf : floating value
+        The titrated volume at the time of :math:`t ={} \\infty`.
 
     Other Parameters
     ----------------
@@ -115,162 +119,58 @@ def calc_k_from_data(
     +-----------+-------+-------+
     | Vt / cm^3 | 18.82 |  ...  |
     +-----------+-------+-------+
+
+    The ``vt_or_table`` and ``t`` must not include the infinite time data.
     """
-    if (
-        isinstance(vt_or_table, np.ndarray) and
-        isinstance(t, np.ndarray)
-    ):
-        result = least_squares(
-            _calc_residual,
-            np.array(
-                (
-                    k_pred,
-                    a,
-                    b,
-                )
-            ),
-            args=(
-                vt_or_table,
-                t,
-                v_r,
-                v_hcl,
-                c_hcl,
-                c_base,
-            )
+    times: np.ndarray[
+        tuple[int],
+        np.dtype[np.floating[Any]]
+    ]
+    vts: np.ndarray[
+        tuple[int],
+        np.dtype[np.floating[Any]]
+    ]
+    if isinstance(vt_or_table, pandas.DataFrame):
+        timeSeries: pandas.Series[np.dtype[np.floating[Any]]] = vt_or_table.iloc[0]
+        times = timeSeries.to_numpy()
+        vts = vt_or_table.iloc[1].to_numpy()
+    if isinstance(vt_or_table, np.ndarray) and isinstance(t, np.ndarray):
+        times = t.view(np.dtype(np.float64))
+        vts = vt_or_table
+    amx: np.ndarray[
+        tuple[int],
+        np.dtype[np.floating[Any]]
+    ] = ((vts - v_t_inf) * c_base) / (-2 * v_r)
+    bk = (b - a) * k_pred
+    result, popt = curve_fit(
+        _model,
+        times,
+        amx,
+        p0=(
+            a,
+            b,
+            bk,
         )
-        f = result.fun
-        j = np.array(result.jac)
-        dof = len(f) - len(result.x)
-        rss = np.sum(f ** 2)
-        mse = rss / dof
-        cov_matrix = np.linalg.inv(np.dot(j.T, j)) * mse
-        stderr = np.sqrt(np.diag(cov_matrix))
-        df = pandas.DataFrame(
-            data=[
-                result.x,
-                stderr
-            ],
-            columns=('Value', 'Error'),
-            index=('k', 'a', 'b',)
-        )
-        return df
-    elif isinstance(vt_or_table, pandas.DataFrame):
-        vt: pandas.Series[np.dtype[np.floating[Any]]] = vt_or_table.iloc[1]
-        time: pandas.Series[np.dtype[np.floating[Any]]] = vt_or_table.iloc[0]
-        result = least_squares(
-            _calc_residual,
-            np.array(
-                (
-                    k_pred,
-                    a,
-                    b,
-                )
-            ),
-            args=(
-                vt.to_numpy(),
-                time.to_numpy(),
-                v_r,
-                v_hcl,
-                c_hcl,
-                c_base,
-            )
-        )
-        f = result.fun
-        j = np.array(result.jac)
-        dof = len(f) - len(result.x)
-        rss = np.sum(f ** 2)
-        mse = rss / dof
-        cov_matrix = np.linalg.inv(np.dot(j.T, j)) * mse
-        stderr = np.sqrt(np.diag(cov_matrix))
-        df = pandas.DataFrame(
-            data=[
-                result.x,
-                stderr
-            ],
-            columns=('Value', 'Error'),
-            index=('k', 'a', 'b',)
-        )
-        return df
-
-
-def calc_left(
-    x: npt.NDArray[np.floating[Any]],
-    a: float | np.floating[Any],
-    b: float | np.floating[Any]
-) -> npt.NDArray[np.floating[Any]]:
-    """Calculates the value which is proprtional to ``k`` and ``t``.
-
-    Parameters
-    ----------
-    x : NDArray[floating[Any]]
-        The reduced concentration of the reactant.
-    a : floating[Any]
-        The initial concentration of the reactant ester.
-    b : floating[Any]
-        The initial concentration of the base.
-
-    Returns
-    -------
-    val : NDArray[floating[Any]]
-        The value of the formula.
-
-    Notes
-    -----
-    The value :math:`v` is equivalent to
-    
-    .. math:: v ={} \\ln \\frac{a \\left( b -{} x \\right)}{b \\left( a -{} x \\right)}
-    """
-    up = a * (b - x)
-    den = b * (a - x)
-    return np.log(up / den)
+    )
+    df = pandas.DataFrame(
+        data={
+            'Coefficients': result,
+            'Errors': np.sqrt(np.diag(popt)),
+        }
+    )
+    return df
 
 
 def _model(
-    v_hcl: float | np.floating[Any],
-    v_t: npt.NDArray[np.floating[Any]],
-    c_base: float | np.floating[Any],
-    c_hcl: float | np.floating[Any],
-    v_r: float | np.floating[Any],
-    a: float | np.floating[Any],
-    b: float | np.floating[Any]
-) -> npt.NDArray[np.floating[Any]]:
-    x = (v_t * c_base - v_hcl * c_hcl + v_r * b) / (2 * v_r)
-    return calc_left(x, a, b)
-
-
-def _calc_residual[
-    Shape: (
-        tuple[int],
-        tuple[int, int],
-        tuple[int, int, int],
-        tuple[int, ...]
-    )
-](
-    parameters: np.ndarray[
+    x: np.ndarray[
         tuple[int],
         np.dtype[np.floating[Any]]
     ],
-    v_t: np.ndarray[
-        Shape,
-        np.dtype[np.floating[Any]]
-    ],
-    t: np.ndarray[
-        Shape,
-        np.dtype[np.floating[Any]]
-    ],
-    v_r: float | np.floating[Any],
-    v_hcl: float | np.floating[Any],
-    c_hcl: float | np.floating[Any],
-    c_base: float | np.floating[Any]
-) -> np.floating[Any]:
-    k, a, b = parameters
-    residual = k * t - _model(
-        v_hcl,
-        v_t,
-        c_base,
-        c_hcl,
-        v_r,
-        a,
-        b
-    )
-    return np.sqrt(np.sum(residual ** 2))
+    a: np.floating[Any] | float,
+    b: np.floating[Any] | float,
+    bk: np.floating[Any] | float
+) -> np.ndarray[
+    tuple[int],
+    np.dtype[np.floating[Any]]
+]:
+    return a - (((a * b)*(np.exp(bk * x) - 1)) / (b * np.exp(bk * x) - a))

@@ -113,6 +113,7 @@ class AnalyzeThread(QThread):
         a: float,
         b: float,
         k_pred: float,
+        v_t_inf: float,
         parent: QObject | None = None,
     ) -> None:
         super().__init__(parent)
@@ -125,6 +126,7 @@ class AnalyzeThread(QThread):
             self.a,
             self.b,
             self.k_pred,
+            self.v_t_inf,
         ) = (
             v_t_and_t,
             v_hcl,
@@ -134,8 +136,9 @@ class AnalyzeThread(QThread):
             a,
             b,
             k_pred,
+            v_t_inf,
         )
 
     def run(self) -> None:
-        df = calc_k_from_data(self.k_pred, self.v_r, self.v_hcl, self.c_base, self.c_hcl, self.a, self.b, self.v_t_and_t)
+        df = calc_k_from_data(self.k_pred, self.v_r, self.v_hcl, self.c_base, self.c_hcl, self.a, self.b, self.v_t_and_t, self.v_t_inf)
         self.ended.emit(df)

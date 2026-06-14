@@ -146,6 +146,11 @@ class _MainWidget(QWidget):
         choose_label = QLabel('または', g2)
         g2Layout.addRow(choose_label, choose_btn)
 
+        self.vt_i_input = QLineEdit(g2)
+        self.vt_i_input.setValidator(doubleValidation)
+        vt_i_label = QLabel('t = inf における滴下量', g2)
+        g2Layout.addRow(vt_i_label, self.vt_i_input)
+
         submit2 = QPushButton('送信', g2)
         submit2.clicked.connect(self._analyze)
         sl2 = QLabel('送信する', g2)
@@ -241,6 +246,7 @@ class _MainWidget(QWidget):
             float(self.a_input.text()),
             float(self.b_input.text()),
             float(self.k_pred_input.text()),
+            float(self.vt_i_input.text()),
             self
         )
         aThread.ended.connect(self._save_data)

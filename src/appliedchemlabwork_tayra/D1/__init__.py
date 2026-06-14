@@ -10,7 +10,6 @@
    calc_concentration
    calc_k_and_a
    calc_k_from_data
-   calc_left
    calc_ln
    calc_required_amount_hcl
    check_match
