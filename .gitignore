@@ -214,3 +214,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Files automatically downloaded.
+*.pt
+
+# Dataset folder
+run/
+dataset/
+gell_app_analysis-*/
