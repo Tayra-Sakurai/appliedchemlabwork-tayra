@@ -16,7 +16,7 @@ def _load_data():
 
 def _train(dataset: Dataset):
     model = YOLO('yolo26n.pt')
-    trainresult = model.train(data=f'{dataset.location}/data.yaml', epochs=100, imgsz=640)
+    trainresult = model.train(data=f'{dataset.location}/data.yaml', epochs=3, imgsz=640, save_dir='./trained-model')
     return trainresult
 
 

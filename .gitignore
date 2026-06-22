@@ -222,3 +222,4 @@ __marimo__/
 run/
 dataset/
 gell_app_analysis-*/
+trained-model/
