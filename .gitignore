@@ -223,3 +223,5 @@ run/
 dataset/
 gell_app_analysis-*/
 trained-model/
+
+*.gitconfig
