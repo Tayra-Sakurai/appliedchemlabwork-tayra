@@ -222,6 +222,9 @@ __marimo__/
 run/
 dataset/
 gell_app_analysis-*/
-trained-model/
+trained-model*/
 
 *.gitconfig
+
+results/
+runs/
