@@ -39,10 +39,14 @@ def main() -> None:
     args = parser.parse_args()
     data = pandas.read_csv(
         args.datafilepath,
-        encoding=args.encoding)
+        encoding=args.encoding,
+        header=0,
+        index_col=False)
     epsilon = pandas.read_csv(
         args.epsilonpath,
-        encoding=args.encoding)
+        encoding=args.encoding,
+        header=0,
+        index_col=False)
     df = calc_concentration(
         data,
         epsilon,
