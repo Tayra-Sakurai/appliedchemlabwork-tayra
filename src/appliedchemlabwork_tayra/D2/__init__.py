@@ -6,10 +6,12 @@
 Functions
 ---------
 
-.. autosummary:
+.. autosummary::
    :toctree: generated/
 
+   calc_concentration
    calc_weighted_mean
    calc_weight
 """
 from ._error_calc import *
+from ._calc_conc import *

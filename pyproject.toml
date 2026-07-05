@@ -46,16 +46,18 @@ extra-dependencies = [
   "mypy>=1.0.0",
 ]
 [tool.hatch.envs.dev]
-extra-dependencies = [
+dependencies = [
   "pydata-sphinx-theme>=0.19",
   "build>=1.5",
   "Sphinx>=9.1",
   "numpydoc>=1.10.0",
+  "hatch>=1.13",
   "hatchling>=1.30.1",
   "scipy_stubs>=1.18",
   "Setuptools>=82.0.1",
   "pytest>=9.1.1",
   "twine>=6.2",
+  "flake8>=7.3",
 ]
 [tool.hatch.envs.types.scripts]
 check = "mypy --install-types --non-interactive {args:src/appliedchemlabwork_tayra tests}"
