@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 5
+names: ['B', 'L', 'M', 'P', 'Pc']
+
+roboflow:
+  workspace: lbiomic-laboratorio-de-biotecnologia-microbiana
+  project: gell_app_analysis
+  version: 14
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/lbiomic-laboratorio-de-biotecnologia-microbiana/gell_app_analysis/dataset/14
