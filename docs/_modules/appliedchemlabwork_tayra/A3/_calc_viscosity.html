@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>appliedchemlabwork_tayra.D2._calc_conc &#8212; AppliedChemLabWork-tayra 0.0.38 documentation</title>
+    <title>appliedchemlabwork_tayra.A3._calc_viscosity &#8212; AppliedChemLabWork-tayra 0.0.38 documentation</title>
   
   
   
@@ -40,7 +40,7 @@
     <script src="../../../_static/documentation_options.js?v=423071ad"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/appliedchemlabwork_tayra/D2/_calc_conc';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/appliedchemlabwork_tayra/A3/_calc_viscosity';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -285,7 +285,7 @@
     
     <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">appliedchemlabwork_tayra.D2._calc_conc</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">appliedchemlabwork_tayra.A3._calc_viscosity</span></li>
   </ul>
 </nav>
 </div>
@@ -302,112 +302,131 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <h1>Source code for appliedchemlabwork_tayra.D2._calc_conc</h1><div class="highlight"><pre>
-<span></span><span class="c1"># SPDX-FileCopyrightText: 2026-present Tayra Sakurai &lt;tayra_sakurai@icloud.com&gt;</span>
-<span class="c1">#</span>
-<span class="c1"># SPDX-License-Identifier: AGPL-3.0-or-later</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span>
+  <h1>Source code for appliedchemlabwork_tayra.A3._calc_viscosity</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Calculates the viscosities.&quot;&quot;&quot;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;calc_concentration&quot;</span><span class="p">]</span>
-
-<span class="nb">type</span> <span class="n">_DataArray2D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span>
-    <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span>
-<span class="p">]</span>
-<span class="nb">type</span> <span class="n">_DataArray1D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span>
-    <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span>
-<span class="p">]</span>
-<span class="nb">type</span> <span class="n">_Array1D</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span>
-    <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;calc_relative_viscosity&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;calc_specific_viscosity&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;calc_inherent_viscosity&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;calc_reduced_viscosity&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
-<div class="viewcode-block" id="calc_concentration">
-<a class="viewcode-back" href="../../../generated/appliedchemlabwork_tayra.D2.calc_concentration.html#appliedchemlabwork_tayra.D2.calc_concentration">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">calc_concentration</span><span class="p">(</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
-    <span class="n">epsilon</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
-    <span class="n">l</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0e-2</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the concentration of the molarity of the solutions.</span>
+<div class="viewcode-block" id="calc_relative_viscosity">
+<a class="viewcode-back" href="../../../generated/appliedchemlabwork_tayra.A3.calc_relative_viscosity.html#appliedchemlabwork_tayra.A3.calc_relative_viscosity">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_relative_viscosity</span><span class="p">(</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+    <span class="n">t_0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the relative viscosities.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    data : DataFrame</span>
-<span class="sd">        The ``DataFrame`` of the absorbances.</span>
-<span class="sd">    epsilon : DataFrame</span>
-<span class="sd">        The ``DataFrame`` of the absorption coefficients by wavelength.</span>
-<span class="sd">    l : floating number, default to 1.0e-2</span>
-<span class="sd">        The optical path length of the optical cell in metre.</span>
+<span class="sd">    t : NDArray[floating[Any]]</span>
+<span class="sd">        The time of the flows.</span>
+<span class="sd">    t_0 : Any floating number</span>
+<span class="sd">        The time of the flows.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    df : DataFrame</span>
-<span class="sd">        The result table data.</span>
+<span class="sd">    viscosity : NDArray[floating[Any]]</span>
+<span class="sd">        The viscpsities.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">t</span> <span class="o">/</span> <span class="n">t_0</span></div>
+
+
+
+<div class="viewcode-block" id="calc_specific_viscosity">
+<a class="viewcode-back" href="../../../generated/appliedchemlabwork_tayra.A3.calc_specific_viscosity.html#appliedchemlabwork_tayra.A3.calc_specific_viscosity">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_specific_viscosity</span><span class="p">(</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+    <span class="n">t_0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the specific viscosity.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : NDArray[floating[Any]]</span>
+<span class="sd">        The times elapsed while the solution flew down.</span>
+<span class="sd">    t_0 : floating[Any] | float</span>
+<span class="sd">        The time of the flow of the solvent.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    specific : NDArray[Floating[Any]]</span>
+<span class="sd">        The specific viscosities.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t_0</span><span class="p">)</span> <span class="o">/</span> <span class="n">t_0</span></div>
+
+
+
+<div class="viewcode-block" id="calc_inherent_viscosity">
+<a class="viewcode-back" href="../../../generated/appliedchemlabwork_tayra.A3.calc_inherent_viscosity.html#appliedchemlabwork_tayra.A3.calc_inherent_viscosity">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_inherent_viscosity</span><span class="p">(</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+    <span class="n">c</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+    <span class="n">t_0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the inherent viscosity.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : NDArray[floating[Any]]</span>
+<span class="sd">    t_0 : floating[Any]</span>
+<span class="sd">        Please see :func:`calc_relative_viscosity`.</span>
+<span class="sd">    c : NDArray[floating[Any]]</span>
+<span class="sd">        The concentrations of the solution.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    viscosity : NDArray[floating[Any]]</span>
+<span class="sd">        The viscosity.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    calc_relative_viscosity : Detailed descriptions.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    This function&#39;s parameters are templeted in the following styles.</span>
+<span class="sd">    This function returns the values of inherent viscosities.</span>
 
-<span class="sd">    ``data`` Style</span>
-<span class="sd">    ^^^^^^^^^^^^^^</span>
-<span class="sd">    +--------+--------------------------------------------+--------------------------------------+---------------------------+---------------------------+</span>
-<span class="sd">    | Sample | :math:`A`, :math:`\\lambda_1`, Flow-through | :math:`A`, :math:`\\lambda_2`, Eluted | :math:`A,\\ \\lambda_2`, FT | :math:`A,\\ \\lambda_2`, El |</span>
-<span class="sd">    +========+============================================+======================================+===========================+===========================+</span>
-<span class="sd">    | 1      | 0.118                                      | 0.033                                | 0.404                     | 0.015                     |</span>
-<span class="sd">    +--------+--------------------------------------------+--------------------------------------+---------------------------+---------------------------+</span>
-<span class="sd">    | 2      | 0.086                                      | 0.065                                | 0.285                     | 0.112                     |</span>
-<span class="sd">    +--------+--------------------------------------------+--------------------------------------+---------------------------+---------------------------+</span>
-
-<span class="sd">    ``epsilon`` Data Style</span>
-<span class="sd">    ^^^^^^^^^^^^^^^^^^^^^^</span>
-<span class="sd">    +-------------------+-------------------+</span>
-<span class="sd">    | :math:`\\lambda_1` | :math:`\\lambda_2` |</span>
-<span class="sd">    +===================+===================+</span>
-<span class="sd">    | 2.63e9            | 1.30e10           |</span>
-<span class="sd">    +-------------------+-------------------+</span>
-
-<span class="sd">    ``df`` Data Style</span>
-<span class="sd">    ^^^^^^^^^^^^^^^^^</span>
-<span class="sd">    +---------------------------+---------------------+</span>
-<span class="sd">    | Flow-through / mol L^(-1) | Eluted / mol L^(-1) |</span>
-<span class="sd">    +===========================+=====================+</span>
-<span class="sd">    | 2.39e-9                   | 5.49e-9             |</span>
-<span class="sd">    +---------------------------+---------------------+</span>
-
-<span class="sd">    About the Concentration</span>
-<span class="sd">    ^^^^^^^^^^^^^^^^^^^^^^^</span>
-<span class="sd">    The molarity is calculated by using Lambert-Beer law.</span>
-<span class="sd">    According to the law, the molarity and the absorbance</span>
-<span class="sd">    is represented in the following equation:</span>
-
-<span class="sd">    .. math::</span>
-
-<span class="sd">       A ={} \\varepsilon c l</span>
-
-<span class="sd">    This equation shows that the absorbance is proportional to molarity.</span>
+<span class="sd">    .. math:: \\ln \\frac{\\iota_{\\mathrm{sp}}}{c}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">absorbances_ft</span><span class="p">:</span> <span class="n">_DataArray2D</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-    <span class="n">absorbances_el</span><span class="p">:</span> <span class="n">_DataArray2D</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-    <span class="n">epsilons</span><span class="p">:</span> <span class="n">_DataArray2D</span> <span class="o">=</span> <span class="n">epsilon</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-    <span class="n">les</span><span class="p">:</span> <span class="n">_DataArray2D</span> <span class="o">=</span> <span class="n">epsilons</span> <span class="o">*</span> <span class="n">l</span>
-    <span class="n">left</span><span class="p">:</span> <span class="n">_DataArray2D</span> <span class="o">=</span> <span class="n">les</span><span class="o">.</span><span class="n">T</span>
-    <span class="n">r1</span><span class="p">:</span> <span class="n">_DataArray1D</span> <span class="o">=</span> <span class="n">absorbances_ft</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-    <span class="n">r2</span><span class="p">:</span> <span class="n">_DataArray1D</span> <span class="o">=</span> <span class="n">absorbances_el</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-    <span class="n">results1</span><span class="p">:</span> <span class="n">_Array1D</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
-    <span class="n">results2</span><span class="p">:</span> <span class="n">_Array1D</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-        <span class="n">data</span><span class="o">=</span><span class="p">{</span>
-            <span class="s1">&#39;Flow-through&#39;</span><span class="p">:</span> <span class="n">results1</span><span class="p">,</span>
-            <span class="s1">&#39;Eluted&#39;</span><span class="p">:</span> <span class="n">results2</span><span class="p">,</span>
-        <span class="p">}</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">df</span></div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">calc_relative_viscosity</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_0</span><span class="p">))</span> <span class="o">/</span> <span class="n">c</span></div>
+
+
+
+<div class="viewcode-block" id="calc_reduced_viscosity">
+<a class="viewcode-back" href="../../../generated/appliedchemlabwork_tayra.A3.calc_reduced_viscosity.html#appliedchemlabwork_tayra.A3.calc_reduced_viscosity">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_reduced_viscosity</span><span class="p">(</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+    <span class="n">c</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+    <span class="n">t_0</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="nb">float</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the reduced viscosity.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : NDArray[floating[Any]]</span>
+<span class="sd">    t_0 : floating[Any]</span>
+<span class="sd">        Please see ``calc_specific_viscosity``.</span>
+<span class="sd">    c : NDArray[floating[Any]]</span>
+<span class="sd">        The concentrations.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    viscosity : NDArray[floating[Any]]</span>
+<span class="sd">        The viscosities.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    calc_specific_viscosity : Detailed descriptions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">calc_specific_viscosity</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_0</span><span class="p">)</span> <span class="o">/</span> <span class="n">c</span></div>
 
 </pre></div>
 
