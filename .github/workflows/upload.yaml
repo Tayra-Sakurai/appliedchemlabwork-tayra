@@ -12,10 +12,6 @@ on:
   pull_request:
     types: ['assigned']
 
-defaults:
-  run:
-    shell: pwsh
-
 jobs:
   build:
     environment:
