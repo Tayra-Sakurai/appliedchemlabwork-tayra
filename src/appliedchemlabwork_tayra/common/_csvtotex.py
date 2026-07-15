@@ -1,6 +1,9 @@
-import pandas
+# SPDX-FileCopyrightText: 2026-present Tayra Sakurai <tayra_sakurai@icloud.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-laterimport pandas
 from os import PathLike
 from typing import Any
+import pandas
 
 __all__ = ["csv_to_latex"]
 
