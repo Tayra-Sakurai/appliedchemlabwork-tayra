@@ -13,3 +13,4 @@ Subpackages
 
 """
 from ._calc_viscosity import *
+from ._calc_mw import *
