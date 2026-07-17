@@ -138,11 +138,12 @@ def calc_k_from_data(
     if isinstance(vt_or_table, np.ndarray) and isinstance(t, np.ndarray):
         times = t.view(np.dtype(np.float64))
         vts = vt_or_table
+    else:
+        raise TypeError('Variable types were invalid.')
     amx: np.ndarray[
         tuple[int],
         np.dtype[np.floating[Any]]
     ] = ((vts - v_t_inf) * c_base) / (-2 * v_r)
-    bk = (b - a) * k_pred
     result, popt = curve_fit(
         _model,
         times,
@@ -150,7 +151,7 @@ def calc_k_from_data(
         p0=(
             a,
             b,
-            bk,
+            k_pred,
         )
     )
     df = pandas.DataFrame(
@@ -169,9 +170,9 @@ def _model(
     ],
     a: np.floating[Any] | float,
     b: np.floating[Any] | float,
-    bk: np.floating[Any] | float
+    k: np.floating[Any] | float
 ) -> np.ndarray[
     tuple[int],
     np.dtype[np.floating[Any]]
 ]:
-    return a - (((a * b)*(np.exp(bk * x) - 1)) / (b * np.exp(bk * x) - a))
+    return a - (((a * b)*(np.exp((b - a) * k * x) - 1)) / (b * np.exp((b - a) * k * x) - a))
