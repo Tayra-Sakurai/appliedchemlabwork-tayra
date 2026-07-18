@@ -18,16 +18,16 @@ def main() -> None:
         type=Path,
         help='The path to the file where the time data is stored.'
     )
-    # parser.add_argument(
-    #     'csv_path',
-    #     type=Path,
-    #     help='Path to output the result numeric data.'
-    # )
-    # parser.add_argument(
-    #     'output_img',
-    #     type=Path,
-    #     help='The path to the image to be saved.'
-    # )
+    parser.add_argument(
+        'output_path1',
+        type=Path,
+        help='The path to the file to save result. Mainly the viscosity data.'
+    )
+    parser.add_argument(
+        'output_path2',
+        type=Path,
+        help='The molecular weight and other data output path.'
+    )
     ns = parser.parse_args()
     df_sol = pandas.read_csv(
         ns.input_sol,
@@ -39,7 +39,7 @@ def main() -> None:
         encoding='utf_8_sig',
         header=0
     )
-    plot_and_process_data(get_data(df_sol, df_res))
+    plot_and_process_data(get_data(df_sol, df_res), ns.output_path1, ns.output_path2)
 
 
 if __name__ == '__main__':

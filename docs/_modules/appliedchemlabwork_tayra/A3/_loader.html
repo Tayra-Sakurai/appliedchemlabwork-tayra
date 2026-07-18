@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>appliedchemlabwork_tayra.A3._loader &#8212; AppliedChemLabWork-tayra 0.0.41 documentation</title>
+    <title>appliedchemlabwork_tayra.A3._loader &#8212; AppliedChemLabWork-tayra 0.0.42 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
-    <script src="../../../_static/documentation_options.js?v=20c5f126"></script>
+    <script src="../../../_static/documentation_options.js?v=173d7b4c"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/appliedchemlabwork_tayra/A3/_loader';</script>
@@ -114,7 +114,7 @@
   
   
   
-    <p class="title logo__title">AppliedChemLabWork-tayra 0.0.41 documentation</p>
+    <p class="title logo__title">AppliedChemLabWork-tayra 0.0.42 documentation</p>
   
 </a></div>
     
@@ -309,6 +309,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">._calc_mw</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">._calc_viscosity</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">PathLike</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;DataSet&#39;</span><span class="p">,</span> <span class="s1">&#39;get_data&#39;</span><span class="p">,</span> <span class="s1">&#39;plot_and_process_data&#39;</span><span class="p">]</span>
 
@@ -376,8 +377,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">vol_solvent</span> <span class="o">=</span> <span class="n">vol_solvent</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t_0</span> <span class="o">=</span> <span class="n">t_0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">concs</span><span class="p">:</span> <span class="n">_Float1D</span> <span class="o">=</span> <span class="p">(((</span><span class="n">vol_sol</span> <span class="o">-</span> <span class="n">vol_solvent</span><span class="p">)</span> <span class="o">*</span> <span class="n">solution_conc</span><span class="p">)</span> <span class="o">/</span> <span class="n">vol_sol</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e2</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">times</span><span class="p">:</span> <span class="n">_Float1D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">concs</span><span class="p">:</span> <span class="n">_Float1D</span> <span class="o">=</span> <span class="p">((</span><span class="n">vol_sol</span> <span class="o">-</span> <span class="n">vol_solvent</span><span class="p">)</span> <span class="o">*</span> <span class="n">solution_conc</span><span class="p">)</span> <span class="o">/</span> <span class="n">vol_sol</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">times</span><span class="p">:</span> <span class="n">_Float1D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
 </div>
 
 
@@ -399,10 +400,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sol_data</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_sol</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">sol_data</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-    <span class="n">solution_conc</span> <span class="o">=</span> <span class="n">sol_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">sol_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">solution_conc</span> <span class="o">=</span> <span class="p">(</span><span class="n">sol_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">sol_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">solution_conc</span><span class="p">)</span>
     <span class="n">k</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">sol_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
     <span class="n">res_solv</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_res</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">t_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">res_solv</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+    <span class="n">t_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">res_solv</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
     <span class="n">result_data</span> <span class="o">=</span> <span class="n">df_res</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
     <span class="n">vol_sol</span><span class="p">:</span> <span class="n">_Float1D</span> <span class="o">=</span> <span class="n">result_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
     <span class="n">vol_solvent</span><span class="p">:</span> <span class="n">_Float1D</span> <span class="o">=</span> <span class="n">result_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
@@ -422,7 +424,9 @@
 <div class="viewcode-block" id="plot_and_process_data">
 <a class="viewcode-back" href="../../../generated/appliedchemlabwork_tayra.A3.plot_and_process_data.html#appliedchemlabwork_tayra.A3.plot_and_process_data">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_and_process_data</span><span class="p">(</span>
-    <span class="n">ds</span><span class="p">:</span> <span class="n">DataSet</span>
+    <span class="n">ds</span><span class="p">:</span> <span class="n">DataSet</span><span class="p">,</span>
+    <span class="n">dest1</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+    <span class="n">dest2</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots the data.</span>
 
@@ -430,9 +434,14 @@
 <span class="sd">    ----------</span>
 <span class="sd">    ds : DataSet</span>
 <span class="sd">        The data set.</span>
+<span class="sd">    dest : PathLike[Any]</span>
+<span class="sd">        The destination file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">times</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">concs</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">times</span> <span class="o">/</span> <span class="n">ds</span><span class="o">.</span><span class="n">t_0</span><span class="p">)</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">y1</span> <span class="o">=</span> <span class="n">calc_reduced_viscosity</span><span class="p">(</span>
         <span class="n">ds</span><span class="o">.</span><span class="n">times</span><span class="p">,</span>
@@ -440,21 +449,53 @@
         <span class="n">ds</span><span class="o">.</span><span class="n">t_0</span>
     <span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">concs</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">eta_{</span><span class="se">\\</span><span class="s1">mathrm</span><span class="si">{red}</span><span class="s1">} / </span><span class="se">\\</span><span class="s1">text</span><span class="si">{g}</span><span class="s1"> </span><span class="se">\\</span><span class="s1">left( 100</span><span class="se">\\</span><span class="s1"> </span><span class="se">\\</span><span class="s1">text</span><span class="si">{mL}</span><span class="se">\\</span><span class="s1">right)^{-1}$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
     <span class="n">y2</span> <span class="o">=</span> <span class="n">calc_inherent_viscosity</span><span class="p">(</span>
         <span class="n">ds</span><span class="o">.</span><span class="n">times</span><span class="p">,</span>
         <span class="n">ds</span><span class="o">.</span><span class="n">concs</span><span class="p">,</span>
         <span class="n">ds</span><span class="o">.</span><span class="n">t_0</span>
     <span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">eta_{</span><span class="se">\\</span><span class="s1">mathrm</span><span class="si">{inh}</span><span class="s1">} / </span><span class="se">\\</span><span class="s1">text</span><span class="si">{g}</span><span class="s1"> </span><span class="se">\\</span><span class="s1">left( 100</span><span class="se">\\</span><span class="s1"> </span><span class="se">\\</span><span class="s1">text</span><span class="si">{mL}</span><span class="se">\\</span><span class="s1">right)^{-1}$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
     <span class="n">b</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span> <span class="o">=</span> <span class="n">calc_intrisic_viscosity</span><span class="p">(</span>
         <span class="n">ds</span><span class="o">.</span><span class="n">concs</span><span class="p">,</span>
         <span class="n">y1</span><span class="p">,</span>
         <span class="n">y2</span>
     <span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">axline</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)),</span> <span class="n">slope</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">a1</span><span class="p">))</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">axline</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)),</span> <span class="n">slope</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">a2</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+    <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axline</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)),</span> <span class="n">slope</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">a1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axline</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)),</span> <span class="n">slope</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">a2</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$c / </span><span class="se">\\</span><span class="s1">text</span><span class="si">{g}</span><span class="se">\\</span><span class="s1"> </span><span class="se">\\</span><span class="s1">left(100 </span><span class="se">\\</span><span class="s1"> </span><span class="se">\\</span><span class="s1">text</span><span class="si">{mL}</span><span class="se">\\</span><span class="s1">right)$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">eta / </span><span class="se">\\</span><span class="s1">text</span><span class="si">{g}</span><span class="s1"> </span><span class="se">\\</span><span class="s1">left( 100</span><span class="se">\\</span><span class="s1"> </span><span class="se">\\</span><span class="s1">text</span><span class="si">{mL}</span><span class="se">\\</span><span class="s1">right)^{-1}$&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;t (Average) / s&#39;</span><span class="p">:</span> <span class="n">ds</span><span class="o">.</span><span class="n">times</span><span class="p">,</span>
+            <span class="s1">&#39;c / g (100 mL)^(-1)&#39;</span><span class="p">:</span> <span class="n">ds</span><span class="o">.</span><span class="n">concs</span><span class="p">,</span>
+            <span class="s1">&#39;Eta_red / (100 mL) g^(-1)&#39;</span><span class="p">:</span> <span class="n">y1</span><span class="p">,</span>
+            <span class="s1">&#39;Eta_inh / (100 mL) g^(-1)&#39;</span><span class="p">:</span> <span class="n">y2</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">df1</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+        <span class="n">dest1</span><span class="p">,</span>
+        <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf_8_sig&#39;</span><span class="p">,</span>
+        <span class="n">lineterminator</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
+    <span class="n">df2</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;t_0 / s&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">t_0</span><span class="p">,),</span>
+            <span class="s1">&#39;m.w.&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">calc_mw</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">K</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">alpha</span><span class="p">),),</span>
+            <span class="s1">&#39;[Eta] / (100 mL) g^(-1)&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">b</span><span class="p">,),</span>
+            <span class="s1">&#39;k[Eta]^2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">a1</span><span class="p">,),</span>
+            <span class="s1">&#39;Beta [Eta]^2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">a2</span><span class="p">,),</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">df2</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+        <span class="n">dest2</span><span class="p">,</span>
+        <span class="n">lineterminator</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf_8_sig&#39;</span>
+    <span class="p">)</span></div>
 
 </pre></div>
 
