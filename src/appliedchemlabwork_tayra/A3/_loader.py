@@ -126,7 +126,7 @@ def plot_and_process_data(
     x = ds.concs
     ax.plot(x, y1, '.')
     y2 = calc_inherent_viscosity(
-        ds.t,
+        ds.times,
         ds.concs,
         ds.t_0
     )
