@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.31"]
 build-backend = "hatchling.build"
 
 [project]
@@ -9,7 +9,7 @@ description = 'Python package for experiment analysis for Applied Chemistry Labo
 readme = "README.md"
 requires-python = ">=3.14"
 license = "AGPL-3.0-or-later"
-license-files = ["LICENSE.txt"]
+license-files = ["LICENSE.txt", "LICENSES/*.*"]
 keywords = []
 authors = [
   { name = "Tayra Sakurai", email = "tayra_sakurai@icloud.com" },
@@ -19,7 +19,6 @@ classifiers = [
   "Programming Language :: Python",
   "Programming Language :: Python :: 3.14",
   "Programming Language :: Python :: Implementation :: CPython",
-  "Programming Language :: Python :: Implementation :: PyPy",
   "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
 ]
 dependencies = [
@@ -31,6 +30,7 @@ dependencies = [
   "roboflow>=1.3.10",
   "ultralytics>=8.4.76",
   "polars>=1.42",
+  "matplotlib>=3.11",
 ]
 
 [project.urls]
@@ -52,7 +52,7 @@ dependencies = [
   "Sphinx>=9.1",
   "numpydoc>=1.10.0",
   "hatch>=1.13",
-  "hatchling>=1.30.1",
+  "hatchling>=1.31",
   "scipy_stubs>=1.18",
   "Setuptools>=82.0.1",
   "pytest>=9.1.1",

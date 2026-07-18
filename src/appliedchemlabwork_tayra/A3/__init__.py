@@ -12,6 +12,10 @@ Subpackages
    calc_reduced_viscosity
    calc_intrisic_viscosity
    calc_mw
+   DataSet
+   get_data
+   plot_and_process_data
 """
 from ._calc_viscosity import *
 from ._calc_mw import *
+from ._loader import *

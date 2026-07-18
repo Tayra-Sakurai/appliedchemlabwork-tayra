@@ -7,6 +7,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
+   appliedchemlabwork_tayra.A3
    appliedchemlabwork_tayra.B1
    appliedchemlabwork_tayra.D1
    appliedchemlabwork_tayra.D2
