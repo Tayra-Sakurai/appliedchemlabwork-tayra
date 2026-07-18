@@ -47,8 +47,10 @@ def calc_intrisic_viscosity[
     spaces = np.zeros(concentration.shape)
     upper = np.column_stack((indeps, concentration, spaces,))
     lower = np.column_stack((indeps, spaces, concentration,))
-    a = np.stack((upper, lower), axis=0)
+    a = np.concat((upper, lower), axis=0)
+    print('A =', a)
     b = np.append(reduced, inherent)
+    print('b =', b)
     res = lsq_linear(a, b)
     return res.x
 
@@ -82,5 +84,5 @@ def calc_mw(
 
        \\left[ \\iota \\right] ={} K M^{\\alpha}
     """
-    res = (intrisic_viscosity / K) / alpha
+    res = (intrisic_viscosity / K) ** (1 / alpha)
     return np.float64(res)

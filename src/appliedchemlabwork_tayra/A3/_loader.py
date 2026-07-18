@@ -4,6 +4,7 @@ from typing import Any, Union
 from ._calc_mw import *
 from ._calc_viscosity import *
 import matplotlib.pyplot as plt
+from os import PathLike
 
 __all__ = ['DataSet', 'get_data', 'plot_and_process_data']
 
@@ -67,8 +68,8 @@ class DataSet:
         self.vol_solvent = vol_solvent
         self.t_0 = t_0
         self.t = t
-        self.concs: _Float1D = (((vol_sol - vol_solvent) * solution_conc) / vol_sol) * 1e2
-        self.times: _Float1D = np.mean(t, axis=1)
+        self.concs: _Float1D = ((vol_sol - vol_solvent) * solution_conc) / vol_sol
+        self.times: _Float1D = np.nanmean(t, axis=1)
 
 
 def get_data(
@@ -86,10 +87,11 @@ def get_data(
     """
     sol_data: pandas.Series[np.float64] = df_sol.iloc[0]
     print(sol_data.dtype)
-    solution_conc = sol_data.iloc[0] / sol_data.iloc[1]
+    solution_conc = (sol_data.iloc[0] / sol_data.iloc[1]) * 100
+    print(solution_conc)
     k, alpha = sol_data.iloc[2:4]
     res_solv: pandas.Series[np.float64] = df_res.iloc[0]
-    t_0 = np.mean(res_solv[2:].to_numpy())
+    t_0 = np.nanmean(res_solv[2:].to_numpy())
     result_data = df_res.iloc[1:]
     vol_sol: _Float1D = result_data.iloc[:, 0].to_numpy()
     vol_solvent: _Float1D = result_data.iloc[:, 1].to_numpy()
@@ -106,7 +108,9 @@ def get_data(
 
 
 def plot_and_process_data(
-    ds: DataSet
+    ds: DataSet,
+    dest1: PathLike[Any],
+    dest2: PathLike[Any]
 ) -> None:
     """Plots the data.
 
@@ -114,9 +118,14 @@ def plot_and_process_data(
     ----------
     ds : DataSet
         The data set.
+    dest : PathLike[Any]
+        The destination file.
     """
+    print(ds.times)
+    print(ds.concs)
+    print(ds.times / ds.t_0)
     _, ax = plt.subplots()
-    ax.axvline()
+    ax.axvline(color='k')
     ax.grid(True)
     y1 = calc_reduced_viscosity(
         ds.times,
@@ -124,18 +133,50 @@ def plot_and_process_data(
         ds.t_0
     )
     x = ds.concs
-    ax.plot(x, y1, '.')
+    ax.plot(x, y1, '.', label='$\\eta_{\\mathrm{red}} / \\text{g} \\left( 100\\ \\text{mL}\\right)^{-1}$', color='C0')
     y2 = calc_inherent_viscosity(
         ds.times,
         ds.concs,
         ds.t_0
     )
-    ax.plot(x, y2, '.')
+    ax.plot(x, y2, '.', label='$\\eta_{\\mathrm{inh}} / \\text{g} \\left( 100\\ \\text{mL}\\right)^{-1}$', color='C1')
     b, a1, a2 = calc_intrisic_viscosity(
         ds.concs,
         y1,
         y2
     )
-    ax.axline((0., float(b)), slope=float(a1))
-    ax.axline((0., float(b)), slope=float(a2))
+    print(b, a1, a2)
+    ax.axline((0., float(b)), slope=float(a1), color='C0')
+    ax.axline((0., float(b)), slope=float(a2), color='C1')
+    ax.legend()
+    ax.set_xlabel('$c / \\text{g}\\ \\left(100 \\ \\text{mL}\\right)$')
+    ax.set_ylabel('$\\eta / \\text{g} \\left( 100\\ \\text{mL}\\right)^{-1}$')
     plt.show()
+    df1 = pandas.DataFrame(
+        data={
+            't (Average) / s': ds.times,
+            'c / g (100 mL)^(-1)': ds.concs,
+            'Eta_red / (100 mL) g^(-1)': y1,
+            'Eta_inh / (100 mL) g^(-1)': y2,
+        }
+    )
+    df1.to_csv(
+        dest1,
+        index=False,
+        encoding='utf_8_sig',
+        lineterminator='\r\n'
+    )
+    df2 = pandas.DataFrame(
+        data={
+            't_0 / s': (ds.t_0,),
+            'm.w.': (calc_mw(b, ds.K, ds.alpha),),
+            '[Eta] / (100 mL) g^(-1)': (b,),
+            'k[Eta]^2': (a1,),
+            'Beta [Eta]^2': (a2,),
+        }
+    )
+    df2.to_csv(
+        dest2,
+        lineterminator='\r\n',
+        encoding='utf_8_sig'
+    )

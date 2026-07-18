@@ -81,7 +81,7 @@ def calc_inherent_viscosity(
     -----
     This function returns the values of inherent viscosities.
 
-    .. math:: \\ln \\frac{\\iota_{\\mathrm{sp}}}{c}
+    .. math:: \\ln \\frac{\\eta_{\\mathrm{sp}}}{c}
     """
     return np.log(calc_relative_viscosity(t, t_0)) / c
 
