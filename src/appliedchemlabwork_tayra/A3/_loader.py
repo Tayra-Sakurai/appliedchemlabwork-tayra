@@ -152,10 +152,14 @@ def plot_and_process_data(
     ax.set_xlabel('$c / \\text{g}\\ \\left(100 \\ \\text{mL}\\right)$')
     ax.set_ylabel('$\\eta / \\text{g} \\left( 100\\ \\text{mL}\\right)^{-1}$')
     plt.show()
+    eta_r = calc_relative_viscosity(ds.times, ds.t_0)
+    eta_sp = calc_specific_viscosity(ds.times, ds.t_0)
     df1 = pandas.DataFrame(
         data={
             't (Average) / s': ds.times,
             'c / g (100 mL)^(-1)': ds.concs,
+            'Eta_r': eta_r,
+            'Eta_sp': eta_sp,
             'Eta_red / (100 mL) g^(-1)': y1,
             'Eta_inh / (100 mL) g^(-1)': y2,
         }
