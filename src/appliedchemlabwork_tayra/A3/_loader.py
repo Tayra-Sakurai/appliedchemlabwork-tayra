@@ -110,7 +110,8 @@ def get_data(
 def plot_and_process_data(
     ds: DataSet,
     dest1: PathLike[Any],
-    dest2: PathLike[Any]
+    dest2: PathLike[Any],
+    style: str = 'default'
 ) -> None:
     """Plots the data.
 
@@ -118,12 +119,18 @@ def plot_and_process_data(
     ----------
     ds : DataSet
         The data set.
-    dest : PathLike[Any]
+    dest1 : PathLike[Any]
         The destination file.
+    dest2 : PathLike[Any]
+        The other destination file.
+        To be output the concentration-independ values.
+    style : Available Matplotlib Style, default 'default'
+        The ``matplotlib`` style args.
     """
     print(ds.times)
     print(ds.concs)
     print(ds.times / ds.t_0)
+    plt.style.use(style)
     _, ax = plt.subplots()
     ax.axvline(color='k')
     ax.grid(True)

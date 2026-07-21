@@ -2,11 +2,20 @@ import pandas
 import argparse
 from pathlib import Path
 from ._loader import *
+import matplotlib.style
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Outputs a data table and graphs of the result of A3 experiment."
+    )
+    parser.add_argument(
+        '-t',
+        '--theme',
+        type=str,
+        choices=matplotlib.style.available,
+        help='Sets the style.',
+        default='default'
     )
     parser.add_argument(
         'input_sol',
