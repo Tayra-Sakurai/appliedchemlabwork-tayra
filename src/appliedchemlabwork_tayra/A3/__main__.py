@@ -48,7 +48,7 @@ def main() -> None:
         encoding='utf_8_sig',
         header=0
     )
-    plot_and_process_data(get_data(df_sol, df_res), ns.output_path1, ns.output_path2)
+    plot_and_process_data(get_data(df_sol, df_res), ns.output_path1, ns.output_path2, style=ns.theme)
 
 
 if __name__ == '__main__':
