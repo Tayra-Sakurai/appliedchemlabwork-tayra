@@ -157,7 +157,7 @@ def plot_and_process_data(
     ax.axline((0., float(b)), slope=float(a2), color='C1')
     ax.legend()
     ax.set_xlabel('$c / \\text{g}\\ \\left(100 \\ \\text{mL}\\right)$')
-    ax.set_ylabel('$\\eta / \\text{g} \\left( 100\\ \\text{mL}\\right)^{-1}$')
+    ax.set_ylabel('$\\eta / \\left( 100\\ \\text{mL}\\right)\\ \\text{g}^{-1}$')
     plt.show()
     eta_r = calc_relative_viscosity(ds.times, ds.t_0)
     eta_sp = calc_specific_viscosity(ds.times, ds.t_0)

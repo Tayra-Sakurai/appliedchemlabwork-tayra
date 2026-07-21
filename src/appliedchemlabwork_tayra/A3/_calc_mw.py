@@ -41,7 +41,7 @@ def calc_intrisic_viscosity[
     Returns
     -------
     viscosity_and_coeffs : Array in shape (3,)
-        The intrisic viscosity, Huggins' coefficient, and Kremer's formula.
+        The intrisic viscosity, Huggins' coefficient, and Kraemer's formula.
     """
     indeps = np.ones(concentration.shape)
     spaces = np.zeros(concentration.shape)
