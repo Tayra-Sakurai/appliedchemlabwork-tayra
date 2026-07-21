@@ -27,7 +27,19 @@ def calc_relative_viscosity(
     Returns
     -------
     viscosity : NDArray[floating[Any]]
-        The viscpsities.
+        The viscosities.
+
+    Notes
+    -----
+    This calculates the viscosity with an approximation formula following below:
+
+    .. math::
+
+       \\eta_{\\mathrm{r}} \\approx{} \\frac{t_1}{t_{\\mathrm{s}}}
+
+    Please note that this approximation is good if the concentration of the solution is enough low.
+    If you are using a highly concentrated solution, please use other method than viscosity method.
+    Viscosity method is not suitable for calculating the molecular weight from the concentrated solution data.
     """
     return t / t_0
 
@@ -81,7 +93,7 @@ def calc_inherent_viscosity(
     -----
     This function returns the values of inherent viscosities.
 
-    .. math:: \\ln \\frac{\\eta_{\\mathrm{sp}}}{c}
+    .. math:: \\frac{\\ln \\eta_{\\mathrm{r}}}{c}
     """
     return np.log(calc_relative_viscosity(t, t_0)) / c
 

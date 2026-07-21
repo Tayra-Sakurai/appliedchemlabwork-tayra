@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>appliedchemlabwork_tayra.A3._calc_viscosity &#8212; AppliedChemLabWork-tayra 0.0.43 documentation</title>
+    <title>appliedchemlabwork_tayra.A3._calc_viscosity &#8212; AppliedChemLabWork-tayra 0.0.46 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
-    <script src="../../../_static/documentation_options.js?v=b345ff55"></script>
+    <script src="../../../_static/documentation_options.js?v=eb4c61eb"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/appliedchemlabwork_tayra/A3/_calc_viscosity';</script>
@@ -114,7 +114,7 @@
   
   
   
-    <p class="title logo__title">AppliedChemLabWork-tayra 0.0.43 documentation</p>
+    <p class="title logo__title">AppliedChemLabWork-tayra 0.0.46 documentation</p>
   
 </a></div>
     
@@ -334,7 +334,19 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    viscosity : NDArray[floating[Any]]</span>
-<span class="sd">        The viscpsities.</span>
+<span class="sd">        The viscosities.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This calculates the viscosity with an approximation formula following below:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">       \\eta_{\\mathrm{r}} \\approx{} \\frac{t_1}{t_{\\mathrm{s}}}</span>
+
+<span class="sd">    Please note that this approximation is good if the concentration of the solution is enough low.</span>
+<span class="sd">    If you are using a highly concentrated solution, please use other method than viscosity method.</span>
+<span class="sd">    Viscosity method is not suitable for calculating the molecular weight from the concentrated solution data.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">t</span> <span class="o">/</span> <span class="n">t_0</span></div>
 
@@ -394,7 +406,7 @@
 <span class="sd">    -----</span>
 <span class="sd">    This function returns the values of inherent viscosities.</span>
 
-<span class="sd">    .. math:: \\ln \\frac{\\eta_{\\mathrm{sp}}}{c}</span>
+<span class="sd">    .. math:: \\frac{\\ln \\eta_{\\mathrm{r}}}{c}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">calc_relative_viscosity</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_0</span><span class="p">))</span> <span class="o">/</span> <span class="n">c</span></div>
 
