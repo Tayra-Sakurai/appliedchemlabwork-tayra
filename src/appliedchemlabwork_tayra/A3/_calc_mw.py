@@ -82,7 +82,7 @@ def calc_mw(
 
     .. math::
 
-       \\left[ \\iota \\right] ={} K M^{\\alpha}
+       \\left[ \\eta \\right] ={} K M^{\\alpha}
     """
     res = (intrisic_viscosity / K) ** (1 / alpha)
     return np.float64(res)
