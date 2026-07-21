@@ -10,7 +10,19 @@ readme = "README.md"
 requires-python = ">=3.14"
 license = "AGPL-3.0-or-later"
 license-files = ["LICENSE.txt", "LICENSES/*.*"]
-keywords = []
+keywords = [
+  "chemistry",
+  "experiment",
+  "analysis",
+  "polymer",
+  "electrophoresis",
+  "yield",
+  "molecule",
+  "molecular weight",
+  "plotting",
+  "numpy",
+  "scipy",
+]
 authors = [
   { name = "Tayra Sakurai", email = "tayra_sakurai@icloud.com" },
 ]
