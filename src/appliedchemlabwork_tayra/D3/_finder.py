@@ -7,6 +7,8 @@ from ultralytics import YOLO
 from ultralytics.engine.results import Results
 import numpy as np
 import polars as pl
+import matplotlib.pyplot as plt
+import matplotlib as mpl
 
 
 def find_boxes(
@@ -37,9 +39,12 @@ def find_boxes(
     """
     model = YOLO("./trained-model/weights/best.pt")
     img = cv2.imread(filepath)
+    mplimg = plt.imread(filepath)
+    plt.imshow(mplimg)
+    plt.show()
     if img is None:
         raise FileNotFoundError('The requested file was not found.')
-    results: list[Results] = model(img, save=True, save_dir=fsave, conf=0.1)
+    results: list[Results] = model(img, save=True, save_dir=fsave, conf=0.05)
     for i, result in enumerate(results):
         df = result.to_df()
         print(df)
