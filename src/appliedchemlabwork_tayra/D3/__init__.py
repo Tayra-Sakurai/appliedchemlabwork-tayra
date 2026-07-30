@@ -9,8 +9,10 @@ Module Functions
    :toctree: generated/
 
    find_boxes
+   plot_dna
    SuperWindow
 """
 from ._finder import *
 from ._widgets import *
-__all__ = ['find_boxes', 'SuperWindow']
+from ._plot_module import *
+__all__ = ['find_boxes', 'SuperWindow', 'plot_dna']
