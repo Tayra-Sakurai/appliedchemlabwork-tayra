@@ -10,6 +10,8 @@ from typing import TextIO, Any, overload
 from PyQt6.QtCore import QObject
 from scipy.stats import pearsonr
 
+__all__ = ['get_data', 'check_relation']
+
 type _Array1D[T: np.generic[Any]] = np.ndarray[
     tuple[int],
     np.dtype[T]

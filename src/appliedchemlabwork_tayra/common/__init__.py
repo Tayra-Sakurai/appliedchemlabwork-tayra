@@ -10,7 +10,10 @@ Submodules
    :toctree: generated/
 
    calc_return_rate
+   check_relation
    csv_to_latex
+   get_data
 """
 from ._returnrate import *
 from ._csvtotex import *
+from ._least_square import *

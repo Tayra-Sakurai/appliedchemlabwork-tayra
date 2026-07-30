@@ -9,7 +9,7 @@
 project = 'AppliedChemLabWork-tayra'
 copyright = '2026, Tayra Sakurai'
 author = 'Tayra Sakurai'
-release = '0.0.51'
+release = '0.0.53'
 
 import sys
 from pathlib import Path
