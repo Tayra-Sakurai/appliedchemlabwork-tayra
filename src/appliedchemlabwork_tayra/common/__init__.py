@@ -17,3 +17,4 @@ Submodules
 from ._returnrate import *
 from ._csvtotex import *
 from ._least_square import *
+from . import plot

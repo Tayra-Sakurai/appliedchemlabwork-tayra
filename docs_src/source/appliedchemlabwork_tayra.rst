@@ -5,7 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 5
 
    appliedchemlabwork_tayra.A3
    appliedchemlabwork_tayra.B1
@@ -13,6 +13,7 @@ Subpackages
    appliedchemlabwork_tayra.D2
    appliedchemlabwork_tayra.D3
    appliedchemlabwork_tayra.common
+   appliedchemlabwork_tayra.common.plot
 
 Module contents
 ---------------
