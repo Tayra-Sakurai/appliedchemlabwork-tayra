@@ -2,6 +2,7 @@
 
 [![PyPI - Version](https://img.shields.io/pypi/v/appliedchemlabwork-tayra.svg)](https://pypi.org/project/appliedchemlabwork-tayra)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/appliedchemlabwork-tayra.svg)](https://pypi.org/project/appliedchemlabwork-tayra)
+[![PyPI License](https://img.shields.io/pypi/l/appliedchemlabwork-tayra)](https://github.com/Tayra-Sakurai/appliedchemlabwork-tayra/LICENSE.txt)
 
 -----
 
