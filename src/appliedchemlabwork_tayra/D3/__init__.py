@@ -8,6 +8,7 @@ Module Functions
 .. autosummary::
    :toctree: generated/
 
+   estimate
    find_boxes
    plot_dna
    SuperWindow
@@ -15,4 +16,5 @@ Module Functions
 from ._finder import *
 from ._widgets import *
 from ._plot_module import *
-__all__ = ['find_boxes', 'SuperWindow', 'plot_dna']
+from ._est import *
+__all__ = ['find_boxes', 'SuperWindow', 'plot_dna', 'estimate']

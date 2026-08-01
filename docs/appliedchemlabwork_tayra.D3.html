@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>appliedchemlabwork_tayra.D3 package &#8212; AppliedChemLabWork-tayra 0.0.55 documentation</title>
+    <title>appliedchemlabwork_tayra.D3 package &#8212; AppliedChemLabWork-tayra 0.0.56 documentation</title>
   
   
   
@@ -38,14 +38,14 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
 
-    <script src="_static/documentation_options.js?v=b87b3bc5"></script>
+    <script src="_static/documentation_options.js?v=8f83b1af"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'appliedchemlabwork_tayra.D3';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="appliedchemlabwork_tayra.D3.find_boxes" href="generated/appliedchemlabwork_tayra.D3.find_boxes.html" />
+    <link rel="next" title="appliedchemlabwork_tayra.D3.estimate" href="generated/appliedchemlabwork_tayra.D3.estimate.html" />
     <link rel="prev" title="appliedchemlabwork_tayra.D2.calc_weight" href="generated/appliedchemlabwork_tayra.D2.calc_weight.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -117,7 +117,7 @@
   
   
   
-    <p class="title logo__title">AppliedChemLabWork-tayra 0.0.55 documentation</p>
+    <p class="title logo__title">AppliedChemLabWork-tayra 0.0.56 documentation</p>
   
 </a></div>
     
@@ -300,6 +300,7 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">appliedchemlabwork_tayra.D3 package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/appliedchemlabwork_tayra.D3.estimate.html">appliedchemlabwork_tayra.D3.estimate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/appliedchemlabwork_tayra.D3.find_boxes.html">appliedchemlabwork_tayra.D3.find_boxes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/appliedchemlabwork_tayra.D3.plot_dna.html">appliedchemlabwork_tayra.D3.plot_dna</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/appliedchemlabwork_tayra.D3.SuperWindow.html">appliedchemlabwork_tayra.D3.SuperWindow</a></li>
@@ -392,13 +393,16 @@
 <h3>Module Functions<a class="headerlink" href="#module-functions" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/appliedchemlabwork_tayra.D3.find_boxes.html#appliedchemlabwork_tayra.D3.find_boxes" title="appliedchemlabwork_tayra.D3.find_boxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_boxes</span></code></a>(filepath, save_to[, fsave])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/appliedchemlabwork_tayra.D3.estimate.html#appliedchemlabwork_tayra.D3.estimate" title="appliedchemlabwork_tayra.D3.estimate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">estimate</span></code></a>(slope, intercept, df)</p></td>
+<td><p>Estimates the length of the DNA from the line data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/appliedchemlabwork_tayra.D3.find_boxes.html#appliedchemlabwork_tayra.D3.find_boxes" title="appliedchemlabwork_tayra.D3.find_boxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_boxes</span></code></a>(filepath, save_to[, fsave])</p></td>
 <td><p>Find bands as bounding boxes.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/appliedchemlabwork_tayra.D3.plot_dna.html#appliedchemlabwork_tayra.D3.plot_dna" title="appliedchemlabwork_tayra.D3.plot_dna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_dna</span></code></a>(bdata[, style])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/appliedchemlabwork_tayra.D3.plot_dna.html#appliedchemlabwork_tayra.D3.plot_dna" title="appliedchemlabwork_tayra.D3.plot_dna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_dna</span></code></a>(bdata[, style])</p></td>
 <td><p>Plots the data from the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and returns the linear regression result.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/appliedchemlabwork_tayra.D3.SuperWindow.html#appliedchemlabwork_tayra.D3.SuperWindow" title="appliedchemlabwork_tayra.D3.SuperWindow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SuperWindow</span></code></a>(parent, flags)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/appliedchemlabwork_tayra.D3.SuperWindow.html#appliedchemlabwork_tayra.D3.SuperWindow" title="appliedchemlabwork_tayra.D3.SuperWindow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SuperWindow</span></code></a>(parent, flags)</p></td>
 <td><p>The main window of the GUI tools.</p></td>
 </tr>
 </tbody>
@@ -486,6 +490,30 @@
 <span class="sig-name descname"><span class="pre">start_btn</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">QPushButton</span></span><a class="headerlink" href="#appliedchemlabwork_tayra.D3.SuperWindow.start_btn" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="appliedchemlabwork_tayra.D3.estimate">
+<span class="sig-prename descclassname"><span class="pre">appliedchemlabwork_tayra.D3.</span></span><span class="sig-name descname"><span class="pre">estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">floating</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercept</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">floating</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/appliedchemlabwork_tayra/D3/_est.html#estimate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#appliedchemlabwork_tayra.D3.estimate" title="Link to this definition">#</a></dt>
+<dd><p>Estimates the length of the DNA from the line data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>slope</strong><span class="classifier">floating number</span></dt><dd><p>The slope of the line.</p>
+</dd>
+<dt><strong>intercept</strong><span class="classifier">floating number</span></dt><dd><p>The intercept of the line.</p>
+</dd>
+<dt><strong>df</strong><span class="classifier">DataFrame</span></dt><dd><p>The table data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>df</strong><span class="classifier">DataFrame</span></dt><dd><p>Modified DataFrame object.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -583,11 +611,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="generated/appliedchemlabwork_tayra.D3.find_boxes.html"
+       href="generated/appliedchemlabwork_tayra.D3.estimate.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">appliedchemlabwork_tayra.D3.find_boxes</p>
+        <p class="prev-next-title">appliedchemlabwork_tayra.D3.estimate</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -622,6 +650,7 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#appliedchemlabwork_tayra.D3.SuperWindow.start_btn"><code class="docutils literal notranslate"><span class="pre">SuperWindow.start_btn</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#appliedchemlabwork_tayra.D3.estimate"><code class="docutils literal notranslate"><span class="pre">estimate()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#appliedchemlabwork_tayra.D3.find_boxes"><code class="docutils literal notranslate"><span class="pre">find_boxes()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#appliedchemlabwork_tayra.D3.plot_dna"><code class="docutils literal notranslate"><span class="pre">plot_dna()</span></code></a></li>
 </ul>

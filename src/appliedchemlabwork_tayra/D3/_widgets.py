@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026-present Tayra Sakurai <tayra_sakurai@icloud.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
 from PyQt6.QtWidgets import QWidget, QMainWindow, QGraphicsView, QVBoxLayout, QFileDialog, QLineEdit, QLabel, QGroupBox, QFormLayout, QPushButton, QGraphicsScene
 from PyQt6.QtCore import QStandardPaths, Qt
 from PyQt6.QtGui import QImage
