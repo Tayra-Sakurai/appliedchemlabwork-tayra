@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>appliedchemlabwork_tayra.D3._est &#8212; AppliedChemLabWork-tayra 0.0.56 documentation</title>
+    <title>appliedchemlabwork_tayra.D3._est &#8212; AppliedChemLabWork-tayra 0.0.57 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
 
-    <script src="../../../_static/documentation_options.js?v=8f83b1af"></script>
+    <script src="../../../_static/documentation_options.js?v=2bfb35b6"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/appliedchemlabwork_tayra/D3/_est';</script>
@@ -114,7 +114,7 @@
   
   
   
-    <p class="title logo__title">AppliedChemLabWork-tayra 0.0.56 documentation</p>
+    <p class="title logo__title">AppliedChemLabWork-tayra 0.0.57 documentation</p>
   
 </a></div>
     
@@ -342,13 +342,13 @@
 <span class="sd">        Modified DataFrame object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">_Float1D</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">intercept</span><span class="p">)</span> <span class="o">/</span> <span class="n">slope</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="n">slope</span> <span class="o">+</span> <span class="n">intercept</span>
     <span class="n">col_name</span> <span class="o">=</span> <span class="s1">&#39;Estimated length of DNA / bp&#39;</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
         <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">col_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Estimated length of DNA (</span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">) / bp&#39;</span>
-    <span class="n">df</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">x</span>
     <span class="k">return</span> <span class="n">df</span></div>
 
 </pre></div>

@@ -35,11 +35,11 @@ def estimate(
         Modified DataFrame object.
     """
     y: _Float1D = df.iloc[:, 0].to_numpy()
-    x = (y - intercept) / slope
+    x = y * slope + intercept
     col_name = 'Estimated length of DNA / bp'
     count = 0
     while col_name in df.columns:
         count += 1
         col_name = f'Estimated length of DNA ({count}) / bp'
-    df[col_name] = x
+    df[col_name] = 10 ** x
     return df
